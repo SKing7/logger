@@ -1,0 +1,20 @@
+{
+  "name": "analyzer",
+  "version": "0.1.0",
+  "description": "autonavi log analyze",
+  "url": "",
+  "keywords": [],
+  "author": "zhe.liu@autonavi.com",
+  "main": "main",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "line-reader": "^0.2.4",
+    "lodash": "^2.4.1",
+    "moment": "^2.8.3",
+    "mongoose": "^3.8.17",
+    "optimist": "^0.6.1"
+  }
+}
