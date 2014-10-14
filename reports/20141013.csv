@@ -1,0 +1,13 @@
+timingLabel,requesttime,percent
+rt_search_view,17912,90%
+rt_search_mapview,8466,90%
+rt_detail_index,9608,90%
+rt_navigation_buslist,12025,90%
+rt_index_index,9570,90%
+rt_navigation_index,10392,90%
+rt_search_view,5193,50%
+rt_search_mapview,2615,50%
+rt_detail_index,2502,50%
+rt_navigation_buslist,3294,50%
+rt_index_index,3234,50%
+rt_navigation_index,2575,50%
