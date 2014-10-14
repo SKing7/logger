@@ -1,4 +1,4 @@
 node_modules/
-_
+*.csv
 npm-debug.log
 

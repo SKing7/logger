@@ -11,8 +11,11 @@
     "url": ""
   },
   "dependencies": {
+    "colors": "^1.0.3",
+    "fast-csv": "^0.5.2",
     "line-reader": "^0.2.4",
     "lodash": "^2.4.1",
+    "microtime": "^1.0.1",
     "moment": "^2.8.3",
     "mongoose": "^3.8.17",
     "optimist": "^0.6.1"
