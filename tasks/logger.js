@@ -20,14 +20,13 @@ var startTime = mt.now();
 var endTime;
 var writableStream;
 var csvStream;
-var reportPath = logConfig;
+var reportPath = './';
 var limit = 1000;
 var count = 0;
 
-if (env === 'dev') {
-    reportPath = './';
-} else {
+if (env === 'production') {
     reportPath = logConfig.reportsPath;
+    limit = 0;
 }
 if (!time) {
     time = moment().subtract(1, 'days').format(logConfig.timestampRegx);

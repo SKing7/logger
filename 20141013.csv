@@ -1,9 +1,0 @@
-性能指标,50%,90%
-rt_search_view,4669,14354
-rt_search_mapview,2121,5375
-rt_detail_index,2262,14691
-rt_navigation_buslist,2877,5730
-rt_index_index,2489,5857
-rt_navigation_index,2744,4509
-%2Fservice%2Fvalueadded%2Finfosearch.json,254,1194
-%2Fservice%2Fpoi%2Fkeywords.json,785,2559
