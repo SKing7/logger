@@ -2,13 +2,20 @@ var moment = require('moment');
 var mt = require('microtime');
 var _ = require('lodash');
 var cs = require('../lib/console');
+var config = require('../config/config');
+var logConfig = config.log;
 var fs = require('fs');
 var csv = require('fast-csv');
 var reader = require('../lib/reader');
 var env = process.env.NODE_ENV;
-var eacher = reader.eacher();
+var argv = require('optimist').argv;
+var time = argv.t;
+if (!time) {
+    time = moment().subtract(1, 'days').format('YYYYMMDD');
+}
+var eacher = reader.eacher(time);
 var timingDb = {};
-var limit = 10000;
+var limit = 0;
 var count = 0;
 var showKeys = {
     rt: [],
@@ -19,10 +26,10 @@ var startTime = mt.now();
 var endTime;
 
 var csvStream = csv.format({headers: true}),
-    writableStream = fs.createWriteStream("my.csv");
+    writableStream = fs.createWriteStream(logConfig.reportsPath + time + ".csv");
 
 writableStream.on("finish", function(){
-   console.log("DONE!");
+   cs.info("DONE!");
 });
 csvStream.pipe(writableStream);
 
@@ -93,29 +100,22 @@ function calcRt(per) {
     per = per || 0.5;
     var data = timingDb.rt;
     var len;
-    var startIndex; 
-    var endIndex; 
+    var index; 
     var result = {};
     var tmpData;
     _.forEach(data, function (v, k) {
         len = v.length;
-        startIndex = len * (per - 0.1); 
-        endIndex = len * per; 
+        index = Math.floor(len * per); 
         data[k] = v.sort(function (v1, v2) {
             return v1 - v2;
         });
-        tmpData = data[k].slice(startIndex, endIndex);
+        tmpData = data[k][index];
         result[k] = {};
         result[k].count = len;
         result[k].data = tmpData;
-        result[k].samplecount = tmpData.length;
     })
     _.forEach(result, function (v, k) {
-        var totalTime = 0;
-        _.forEach(v.data, function (v) {
-            totalTime += (+v);
-        });
-        csvStream.write({timingLabel: k, average: (totalTime / v.samplecount).toFixed(0), percent: per * 100  + '%'});
+        csvStream.write({timingLabel: k, requesttime: v.data, percent: per * 100  + '%'});
     });
 }
 function calcAx() {
