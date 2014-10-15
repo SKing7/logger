@@ -8,7 +8,7 @@ module.exports = {
         separator: '||',
     },
     mail: {
-to: process.env.NODE_ENV === 'production' ? 'zero@autonavi.com' : 'zhe.liu@autonavi.com',
+        to: process.env.NODE_ENV === 'production' ? 'zero@autonavi.com' : 'zhe.liu@autonavi.com',
         cc: 'zhe.liu@autonavi.com',
         transport: {
             host: 'smtp.autonavi.com',
