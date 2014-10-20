@@ -2,12 +2,8 @@ html
   head
     body
       table
-        tr
-          th 性能指标
-          each v, k in pers
-            th #{v*100 + '%'} 
-          each v, k in data
-            tr
-              each v1, k1 in v
-                td #{v1}
+        each v, k in data
+          tr
+            each v1 in v
+              td #{v1}
           

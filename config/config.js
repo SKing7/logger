@@ -1,15 +1,16 @@
-
+var path = require('path');
 module.exports = {
     log: {
         path: '/opt/webserver/logs/',
-        reportsPath: __dirname + '/../reports/',
+        reportsPath: path.resolve(process.env.NODE_ENV === 'production' ? __dirname + '/../reports' : __dirname + '/..') + '/',
         timestampRegx: 'YYYYMMDD',
         prefix: 'access_',
         separator: '||',
     },
     mail: {
-        to: process.env.NODE_ENV === 'production' ? 'zero@autonavi.com' : 'zhe.liu@autonavi.com',
-        cc: 'zhe.liu@autonavi.com',
+        templatePath: path.resolve(__dirname + '/../templates') + '/',
+        to: process.env.NODE_ENV === 'production' ? 'Yuki@autonavi.com' : 'zhe.liu@autonavi.com',
+        cc: process.env.NODE_ENV === 'production' ? 'zhe.liu@autonavi.com': '',
         transport: {
             host: 'smtp.autonavi.com',
             port: 25,
@@ -22,10 +23,12 @@ module.exports = {
             }
         }
     },
+    limitPageMap: {
+        ol: ['/', '/search/view/', '/search/mapview/', '/detail/index/', '/navigation/index/', '/navigation/buslist/'],
+    },
     timingKeyMap: {
-        rt: [],
-        ol: [],
-        ax: ['open', 'received', 'loading', 'done'],
+        ol: ['dl', 'la'],
+        ax: ['total'],
     },
     pers: [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
 }

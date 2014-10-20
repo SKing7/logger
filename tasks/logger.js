@@ -17,19 +17,16 @@ var eacher;
 var timingDb = {};
 var startTime = mt.now();
 var endTime;
-var reportPath = './';
-var limit = 1000;
+var limit = 100;
 var count = 0;
 
 if (env === 'production') {
-    reportPath = logConfig.reportsPath;
     limit = 0;
 }
 if (!time) {
     time = moment().subtract(1, 'days').format(logConfig.timestampRegx);
 }
 poll.init({
-    filePath: reportPath + time + ".csv",
     time: time
 });
 
