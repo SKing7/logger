@@ -17,7 +17,7 @@ var eacher;
 var timingDb = {};
 var startTime = mt.now();
 var endTime;
-var limit = 100;
+var limit = 10;
 var count = 0;
 
 if (env === 'production') {

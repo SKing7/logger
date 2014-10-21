@@ -19,7 +19,7 @@ module.exports = {
             },
             auth: {
                 user: 'zhe.liu@autonavi.com',
-                pass: ''
+                pass: '' //lZ_123
             }
         }
     },
@@ -27,8 +27,15 @@ module.exports = {
         ol: ['/', '/search/view/', '/search/mapview/', '/detail/index/', '/navigation/index/', '/navigation/buslist/'],
     },
     timingKeyMap: {
-        ol: ['dl', 'la'],
-        ax: ['total'],
+        ol: ['la'],
+        ax: ['total', 'received', 'done'],
+    },
+    aliasMap: {
+        la: 'Full Load Time',
+        received: 'Wait Time',
+        done: 'Receive Time',
+        total: 'API Total Time',
+        fs: 'First Screen Time',
     },
     pers: [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
 }
