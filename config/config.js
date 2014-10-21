@@ -1,5 +1,8 @@
 var path = require('path');
 module.exports = {
+    db: {
+        url: 'mongodb://127.0.0.1:27017/motiming',
+    },
     log: {
         path: '/opt/webserver/logs/',
         reportsPath: path.resolve(process.env.NODE_ENV === 'production' ? __dirname + '/../reports' : __dirname + '/..') + '/',
@@ -9,7 +12,7 @@ module.exports = {
     },
     mail: {
         templatePath: path.resolve(__dirname + '/../templates') + '/',
-        to: process.env.NODE_ENV === 'production' ? 'Yuki@autonavi.com' : 'zhe.liu@autonavi.com',
+        to: process.env.NODE_ENV === 'production1' ? 'Yuki@autonavi.com' : 'zhe.liu@autonavi.com',
         cc: process.env.NODE_ENV === 'production' ? 'zhe.liu@autonavi.com': '',
         transport: {
             host: 'smtp.autonavi.com',
@@ -33,7 +36,7 @@ module.exports = {
     aliasMap: {
         la: 'Full Load Time',
         received: 'Wait Time',
-        done: 'Receive Time',
+        done: 'Receive And Parse Time',
         total: 'API Total Time',
         fs: 'First Screen Time',
     },
