@@ -1,5 +1,5 @@
 use motiming;
-var rt = db.quartiles.find({}, {reportDate: 1}).sort({reportDate: -1});
+var rt = db.quartiles.find({}, {reportDate: 1})
 var ds = {};
 var d;
 var tmp;

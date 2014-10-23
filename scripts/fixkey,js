@@ -1,0 +1,3 @@
+use motiming;
+var rt = db.quartiles.find({name: '/'}).length()
+rt

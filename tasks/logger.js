@@ -18,7 +18,7 @@ var eacher;
 var timingDb = {};
 var startTime = mt.now();
 var endTime;
-var limit = 10;
+var limit = 0;
 var count = 0;
 
 mongoose.connect(config.db.url);
@@ -45,7 +45,12 @@ eacher(function (data) {
     cs.info('read use time: ' + (endTime - startTime));
     cs.info(count + ' line logs');
     calcHub();
-    out.toDb();
+	if (env === 'production') {
+    	out.toDb();
+	} else {
+		console.log(_.keys(timingDb.ol));
+		console.log(_.keys(timingDb.ol).length);
+	}
 });
 function calcHub() {
     calc.rt(timingDb, out);

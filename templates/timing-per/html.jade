@@ -24,7 +24,6 @@ html
         border-collapse:collapse;
       }
       th{ 
-        width:15%!important; 
         box-sizing:border-box;
         padding:7px 5px;
         text-align: center;
@@ -53,12 +52,12 @@ html
         h2 #{keyMap[k]}
         table
           tr
-            th(width="30%") KEY
-            th(width="20%") 当日指标值
-            th(width="10%") 环比前一天
-            th(width="10%") 同比上周
-            th(width="10%") 同比上月
-            th(width="20%") 周平均
+            th KEY
+            th(width="12%") 指标值
+            th(width="15%") 环比前一天
+            th(width="15%") 同比上周
+            th(width="15%") 同比上月
+            th(width="12%") 周平均
           each v1, k1 in v
             tr
               td !{k1}
