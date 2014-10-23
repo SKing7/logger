@@ -2,13 +2,14 @@ var moment = require('moment');
 var mt = require('microtime');
 var _ = require('lodash');
 var argv = require('optimist').argv;
+var mongoose = require('mongoose');
 
 var reader = require('../lib/reader');
 var calc = require('../lib/calc');
 var transfer = require('../lib/transfer');
 var cs = require('../lib/console');
 var config = require('../config/config');
-var poll = require('../lib/out');
+var out = require('../lib/out');
 
 var env = process.env.NODE_ENV || 'dev';
 var logConfig = config.log;
@@ -20,13 +21,14 @@ var endTime;
 var limit = 10;
 var count = 0;
 
+mongoose.connect(config.db.url);
 if (env === 'production') {
     limit = 0;
 }
 if (!time) {
     time = moment().subtract(1, 'days').format(logConfig.timestampRegx);
 }
-poll.init({
+out.init({
     time: time
 });
 
@@ -43,10 +45,10 @@ eacher(function (data) {
     cs.info('read use time: ' + (endTime - startTime));
     cs.info(count + ' line logs');
     calcHub();
-    poll.end();
+    out.toDb();
 });
 function calcHub() {
-    calc.rt(timingDb, poll);
-    calc.ol(timingDb, poll);
-    calc.ax(timingDb, poll);
+    calc.rt(timingDb, out);
+    calc.ol(timingDb, out);
+    calc.ax(timingDb, out);
 }

@@ -1,13 +1,27 @@
 html
   head
     style(type='text/css').
-      table{width: 100%;box-sizing:border-box;border:1px solid #ddd;border-spacing:0;border-collapse:collapse;}
+      h2 { font-weight: 700; font-size: 16px; } 
+      table{width: 70%;box-sizing:border-box;border:1px solid #ddd;border-spacing:0;border-collapse:collapse;}
+      th{ width: 15%;}
       td{ padding:5px 10px;border:1px solid #ddd; }
+      tr th:first-child { width: 40%; }
       tr:first-child td {background:#f8f8f8;}
   body
-    table
-      each v, k in data
+    each v, k in data
+      h2 指标项：#{k}
+      table
         tr
-          each v1 in v
-            td #{v1}
+          th 指标
+          th 指标日
+          th 前一天
+          th 上周
+          th 上月
+        each v1, k1 in v
+          tr
+            td #{k1}
+            td #{v1.thatDay}
+            td #{v1.preDay}
+            td #{v1.preWeek}
+            td #{v1.preMonth}
           
