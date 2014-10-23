@@ -34,13 +34,39 @@ async.parallel({
     },
     preMonth: function (cb) {
         quartileController.findAtPreMonth(time, cb);
+    },
+    recent7Days: function (cb) {
+        quartileController.find7Days(time, function (err, data) {
+			var result = {};
+			var ave = {};
+			_.forEach(data, function (v1, k1) {
+			    result[v1.timingType] = result[v1.timingType] || {};
+			    result[v1.timingType][v1.name] = result[v1.timingType][v1.name] || [];
+			    result[v1.timingType][v1.name].push(+v1.value[config.primaryPer * 100]);
+			});
+			var total;
+			_.forEach(result, function (v, k) {
+				_.forEach(v, function (v1, k1) {
+					total = 0;
+					if (!v1.length) return;
+					_.forEach(v1, function (v2) {
+						total += v2;
+					});
+					ave[k] = ave[k] || {};
+					ave[k][k1] = Math.ceil(total / v1.length);
+				});
+			});
+			cb(err, ave);
+		});
     }
 }, function(err, result) {
+	var r7 = result.recent7Days;
+	result.recent7Days = null;
     cs.info('data read done');
     var rt = dataProto(result);
     rt = calcRadio(rt);
     cs.info('mail sending');
-    mail.sendPerTiming(rt, time);
+    mail.sendPerTiming(rt, r7, time);
     cs.info('done');
 });
 function dataProto(result) {

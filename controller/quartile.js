@@ -40,8 +40,17 @@ exports.findAtPreDay = function (d, cb) {
     var filter = {reportDate: oneDay(tmp)}; 
     Quartile.find(filter).exec(cb);
 };
+exports.find7Days = function (d, cb) {
+    var filter = {reportDate: recent7Days(d)}; 
+    Quartile.find(filter).exec(cb);
+};
 function oneDay(d) {
     var start = moment(d, logConfig.timestampRegx).subtract(1, 'second');
+    var end = moment(d, logConfig.timestampRegx).subtract(1, 'second').add(1, 'day');
+    return {$gte: start, $lte: end}; 
+}
+function recent7Days(d) {
+    var start = moment(d, logConfig.timestampRegx).subtract(6, 'day').subtract(1, 'second');
     var end = moment(d, logConfig.timestampRegx).subtract(1, 'second').add(1, 'day');
     return {$gte: start, $lte: end}; 
 }

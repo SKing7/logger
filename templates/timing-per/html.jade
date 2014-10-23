@@ -36,9 +36,6 @@ html
         border:1px solid #ddd; 
         text-align: center; 
       }
-      tr th:first-child { 
-        width: 40%!important; 
-      }
       .drop { 
         color: #31A800; 
       }
@@ -56,11 +53,12 @@ html
         h2 #{keyMap[k]}
         table
           tr
-            th(width="20%") KEY
+            th(width="30%") KEY
             th(width="20%") 当日指标值
-            th(width="20%") 环比前一天
-            th(width="20%") 同比上周
-            th(width="20%") 同比上月
+            th(width="10%") 环比前一天
+            th(width="10%") 同比上周
+            th(width="10%") 同比上月
+            th(width="20%") 周平均
           each v1, k1 in v
             tr
               td !{k1}
@@ -68,5 +66,7 @@ html
               td !{v1.preDay}
               td !{v1.preWeek}
               td !{v1.preMonth}
+              td !{rdata[k][k1]}
       ul.tip
         li 指标值:某个指标的性能数值按升序排序后，在75%点的值
+        li 周平均:某个指标的性能指标值根据当前报表日期一周（某天没有数据时,按实际天数计算）的平均值
