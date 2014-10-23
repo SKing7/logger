@@ -24,7 +24,7 @@ html
         border-collapse:collapse;
       }
       th{ 
-        width:15%; 
+        width:15%!important; 
         box-sizing:border-box;
         padding:7px 5px;
         text-align: center;
@@ -37,7 +37,7 @@ html
         text-align: center; 
       }
       tr th:first-child { 
-        width: 40%; 
+        width: 40%!important; 
       }
       .drop { 
         color: #31A800; 
@@ -45,14 +45,14 @@ html
   body
     div.container
       each v, k in data
-        h2 指标项：#{k}
+        h2 #{keyMap[k]}
         table
           tr
-            th 指标
-            th 指标日
-            th 前一天
-            th 上周
-            th 上月
+            th(width="20%") 指标
+            th(width="20%") 指标日
+            th(width="20%") 前一天
+            th(width="20%") 上周
+            th(width="20%") 上月
           each v1, k1 in v
             tr
               td !{k1}
