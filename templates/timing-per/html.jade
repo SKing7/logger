@@ -1,27 +1,37 @@
 html
   head
     style(type='text/css').
-      h2 { font-weight: 700; font-size: 16px; } 
-      table{width: 70%;box-sizing:border-box;border:1px solid #ddd;border-spacing:0;border-collapse:collapse;}
-      th{ width: 15%;}
-      td{ padding:5px 10px;border:1px solid #ddd; }
+      .container {
+        font-size:12px; 
+        color:#333;
+        max-width:600px!important;
+        display:block!important;
+        padding: 20px;
+        clear:both!important;
+      }
+      h2 { font-weight: 700; font-size: 14px; } 
+      table{width: 100%;box-sizing:border-box;border:1px solid #ddd;border-spacing:0;border-collapse:collapse;}
+      th{ width: 15%; text-align: center; font-weight:bold; }
+      td{ padding:5px 10px;border:1px solid #ddd; text-align: center;}
       tr th:first-child { width: 40%; }
+      .drop { color: #31A800; }
       tr:first-child td {background:#f8f8f8;}
   body
-    each v, k in data
-      h2 指标项：#{k}
-      table
-        tr
-          th 指标
-          th 指标日
-          th 前一天
-          th 上周
-          th 上月
-        each v1, k1 in v
+    div.container
+      each v, k in data
+        h2 指标项：#{k}
+        table
           tr
-            td #{k1}
-            td #{v1.thatDay}
-            td #{v1.preDay}
-            td #{v1.preWeek}
-            td #{v1.preMonth}
-          
+            th 指标
+            th 指标日
+            th 前一天
+            th 上周
+            th 上月
+          each v1, k1 in v
+            tr
+              td !{k1}
+              td !{v1.thatDay}
+              td !{v1.preDay}
+              td !{v1.preWeek}
+              td !{v1.preMonth}
+            

@@ -36,9 +36,12 @@ async.parallel({
         quartileController.findAtPreMonth(time, cb);
     }
 }, function(err, result) {
+    cs.info('data read done');
     var rt = dataProto(result);
     rt = calcRadio(rt);
+    cs.info('mail sending');
     mail.sendPerTiming(rt, time);
+    cs.info('done');
 });
 function dataProto(result) {
     var pdType;
@@ -69,6 +72,8 @@ function dataProto(result) {
 }
 function calcRadio(data) {
     var thatData;
+    var dif;
+    var difRadio;
     _.forEach(data, function (v, k) {
         _.forEach(v, function (v1, k1) {
             thatData = v1.thatDay;
@@ -81,7 +86,13 @@ function calcRadio(data) {
                 }
                 if (k2 !== 'thatDay') {
                     //百分比 精确到小数点一位
-                    v1[k2] = (parseInt((thatData -v2) * 1000/ v2) / 10) + '%'; 
+                    dif = thatData -v2;
+                    difRadio = parseInt(dif * 1000/ v2) / 10;
+                    v1[k2] = difRadio + '%'
+                    if (difRadio < 0) {
+                        v1[k2] = '<em class="drop">' + v1[k2] + '</em>';
+                    }
+                    //+ ('(' + v2 + ')'); 
                 }
             });
         });

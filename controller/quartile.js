@@ -17,6 +17,10 @@ exports.create = function (data) {
         }
     });
 };
+exports.deleteByDate = function (d, cb) {
+    var filter = {reportDate: oneDay(d)}; 
+    Quartile.remove(filter).exec(cb);
+};
 exports.findAtThatDay = function (d, cb) {
     var filter = {reportDate: oneDay(d)}; 
     Quartile.find(filter).exec(cb);
