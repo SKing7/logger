@@ -1,3 +1,3 @@
 #!/bin/bash
 cd /home/logger/analyzer
-NODE_ENV=production /usr/local/bin/node tasks/dailyreport.js -t 20141020
+NODE_ENV=production /usr/local/bin/node tasks/dailyreport.js

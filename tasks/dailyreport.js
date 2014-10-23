@@ -99,18 +99,3 @@ function calcRadio(data) {
     });
     return data;
 }
-function rotateKey(data) {
-    var result = {};
-    _.forEach(data, function (v, k) {
-        _.forEach(v, function (v1, k1) {
-            _.forEach(v1, function (v2, k2) {
-                _.forEach(v2, function (v3, k3) {
-                    result[k3] = result[k3] || {};
-                    result[k3][k2] = result[k3][k2] || {};
-                    result[k3][k2][k] = v3;
-                });
-            });
-        });
-    });
-    return result;
-}
