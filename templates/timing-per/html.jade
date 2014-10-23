@@ -42,17 +42,25 @@ html
       .drop { 
         color: #31A800; 
       }
+      .tip {
+        padding:10px 5px;
+        color: #666;
+      }
+      .tip li {
+        list-style: inside disc;
+        line-height:1.5;
+      }
   body
     div.container
       each v, k in data
         h2 #{keyMap[k]}
         table
           tr
-            th(width="20%") 指标
-            th(width="20%") 指标日
-            th(width="20%") 前一天
-            th(width="20%") 上周
-            th(width="20%") 上月
+            th(width="20%") KEY
+            th(width="20%") 当日指标值
+            th(width="20%") 环比前一天
+            th(width="20%") 同比上周
+            th(width="20%") 同比上月
           each v1, k1 in v
             tr
               td !{k1}
@@ -60,4 +68,5 @@ html
               td !{v1.preDay}
               td !{v1.preWeek}
               td !{v1.preMonth}
-            
+      ul.tip
+        li 指标值:某个指标的性能数值按升序排序后，在75%点的值
