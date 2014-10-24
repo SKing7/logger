@@ -67,12 +67,13 @@ async.parallel({
     rt = calcRadio(rt);
     rt = sortAndAlias(rt);
     cs.info('mail sending');
+    r7 = sortAndAlias(r7);
     mail.sendPerTiming(rt, r7, time);
     cs.info('done');
 });
 function sortAndAlias(rt) {
 	var orderConfig = config.order;
-	//var timingAlias = config.alias.timingKeyMap;
+	var timingAlias = config.alias.timingKeyMap;
 	var keyAlias = config.alias.keyMap;
 	var aliased = {};
 	//timing: {}
@@ -91,7 +92,7 @@ function sortAndAlias(rt) {
 				ordered[keyAlias[v2] || v2] = v1[v2];
 			}
 		});
-		aliased[k1] = ordered;
+		aliased[timingAlias[k1] || k1] = ordered;
 	})
 	return aliased;
 }

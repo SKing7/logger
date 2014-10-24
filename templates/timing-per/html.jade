@@ -3,6 +3,7 @@ html
     meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
     meta(name='viewport', content='width=device-width')
     style(type='text/css').
+      * {margin:0;padding:0;}
       @media only screen and (min-device-width: 600px){
         .container {
           max-width:600px!important;
@@ -11,14 +12,26 @@ html
       .container {
         color:#333;
         font-size:14px; 
+        line-height:1.5;
         display:block!important;
-        padding: 0 10px;
+        padding: 15px 30px;
         clear:both!important;
       }
       h2 { 
-        font-weight: 700; 
+        font-weight: 700;
+        margin-top: 10px;
+        padding: 5px 0;
         font-size:14px; 
       } 
+      em {
+        font-style:normal;
+      }
+      a {
+        text-decoration:none;
+      }
+      .p-top-15 {
+        padding-top:15px;
+      }
       table{ 
         width:100%!important;
         font-size:12px; 
@@ -47,21 +60,21 @@ html
       .error { 
         color: #F41D00; 
       }
-      .tip {
-        padding:10px 5px;
-        color: #999;
-      }
       .weaken {
         font-size:12px;
+        color: #999;
+      }
+      .tip {
+        padding-left:20px;
+        color: #999;
       }
       .tip li {
         list-style: inside disc;
-        line-height:1.5;
       }
   body
     div.container
       each v, k in data
-        h2 #{keyMap[k]}
+        h2 #{k}
         table
           tr
             th KEY
@@ -77,7 +90,10 @@ html
               td !{v1.preDay   || '<span class="weaken">N/A</span>'}
               td !{v1.preWeek  || '<span class="weaken">N/A</span>'}
               td !{v1.preMonth || '<span class="weaken">N/A</span>'}
-              td !{rdata[k][k1]|| '<span class="weaken">N/A</span>'}
-      //ul.tip
-      //  li 指标值:某个指标的性能数值按升序排序后，在75%点的值
-      //  li 周平均:某个指标的性能指标值根据当前报表日期一周（某天没有数据时,按实际天数计算）的平均值
+              td !{rdata[k][k1]}
+      h2 相关文档
+      ul(class="tip")
+        li
+          a(class="weaken" href="http://wiki.opendev.autonavi.com/Mo:%E9%80%9F%E5%BA%A6%E6%8C%87%E6%A0%87") 速度指标wiki(高德内网)
+      //li 指标值:某个指标的性能数值按升序排序后，在75%点的值
+      //li 周平均:某个指标的性能指标值根据当前报表日期一周（某天没有数据时,按实际天数计算）的平均值
