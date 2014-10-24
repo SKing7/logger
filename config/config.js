@@ -15,9 +15,10 @@ module.exports = {
         separator: '||',
     },
     mail: {
+		title: '[速度报表]高德Mo站速度指标报表_',
         templatePath: path.resolve(__dirname + '/../templates') + '/',
-        to: process.env.NODE_ENV === 'production1' ? 'zero@autonavi.com' : 'zhe.liu@autonavi.com',
-        cc: process.env.NODE_ENV === 'production' ? 'zhe.liu@autonavi.com': '',
+        to: process.env.NODE_ENV === 'production' ? 'bigdata-mo@autonavi.com' : 'zhe.liu@autonavi.com',
+        cc: process.env.NODE_ENV === 'production' ? 'Curtis@autonavi.com,zero@autonavi.com,zhe.liu@autonavi.com': '',
         transport: {
             host: 'smtp.autonavi.com',
             port: 25,
@@ -35,24 +36,40 @@ module.exports = {
             ol: olMap,
         },
         timingKeyMap: {
-            ol: ['la'],
+            ol: ['la', 'dl'],
             ax: ['total', 'received', 'done'],
         },
 	},
 	order: {
-	    timingTypesOrder: ['fs', 'la', 'total', 'received', 'done'],
+	    timingTypesOrder: ['fs', 'la', 'dl', 'total', 'received', 'done'],
 	    keysOrder:  olMap.concat(rtMap, axMap) 
 	},
     alias: {
 		timingKeyMap: {
         	la: 'Page Load Time',
+        	dl: 'Page DOMContent Load Time',
         	received: 'API Wait Time',
         	done: 'API Receive & Parse Time',
         	total: 'API Total Time',
         	fs: 'Page First Screen Time',
 		},
 		keyMap: {
-			'/index/index/' : '首页',
+			'rt_index_index'        : '首页',
+			'rt_search_view'        : '搜索结果列表页',
+			'rt_search_mapview'     : '搜索结果图面页',
+			'rt_detail_index'       : 'POI详情页',
+			'rt_navigation_index'   : '路线首页',
+			'rt_navigation_buslist' : '公交导航结果页',
+
+			'/index/index/'         : '首页',
+			'/search/view/'         : '搜索结果列表页',
+			'/search/mapview/'      : '搜索结果图面页',
+			'/detail/index/'        : 'POI详情页',
+			'/navigation/index/'    : '路线首页',
+			'/navigation/buslist/'  : '公交导航结果页',
+
+			'/service/poi/keywords.json'    : '搜索数据',
+			'/service/valueadded/infosearch.json'  : 'POI详情数据',
 		},
     },
     pers: [0.05,0.15,0.25,0.35,0.45,0.55,0.65,0.75,0.85, 0.95],
