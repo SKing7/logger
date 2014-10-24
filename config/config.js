@@ -26,7 +26,7 @@ module.exports = {
             },
             auth: {
                 user: 'zhe.liu@autonavi.com',
-                pass: '1994219lZ_123' //lZ_123
+                pass: '' //lZ_123
             }
         }
     },
