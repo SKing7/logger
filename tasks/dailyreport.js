@@ -65,10 +65,36 @@ async.parallel({
     cs.info('data read done');
     var rt = dataProto(result);
     rt = calcRadio(rt);
+    rt = sortAndAlias(rt);
     cs.info('mail sending');
     mail.sendPerTiming(rt, r7, time);
     cs.info('done');
 });
+function sortAndAlias(rt) {
+	var orderConfig = config.order;
+	//var timingAlias = config.alias.timingKeyMap;
+	var keyAlias = config.alias.keyMap;
+	var aliased = {};
+	//timing: {}
+	var ordered = {};
+	_.forEach(orderConfig.timingTypesOrder, function (v, k) {
+		if (rt[v]) {
+			ordered[v] = rt[v];
+		}
+	});
+	rt = ordered;
+	_.forEach(rt, function (v1, k1) {
+		ordered = {};
+		//k1: fs,waiting
+		_.forEach(orderConfig.keysOrder, function (v2, k2) {
+			if (v1[v2]) {
+				ordered[keyAlias[v2] || v2] = v1[v2];
+			}
+		});
+		aliased[k1] = ordered;
+	})
+	return aliased;
+}
 function dataProto(result) {
     var pdType;
     var pdName;
@@ -117,6 +143,9 @@ function calcRadio(data) {
                     v1[k2] = difRadio + '%'
                     if (difRadio < 0) {
                         v1[k2] = '<em class="drop">' + v1[k2] + '</em>';
+                    }
+                    if (difRadio >= 10) {
+                        v1[k2] = '<em class="error">' + v1[k2] + '</em>';
                     }
                     //+ ('(' + v2 + ')'); 
                 }

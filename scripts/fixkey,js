@@ -1,3 +1,7 @@
 use motiming;
-var rt = db.quartiles.find({name: '/'}).length()
-rt
+var rt = db.quartiles.update({
+	name: '/'
+}, {
+	$set: { name: '/index/index/'}
+});
+print('done');
