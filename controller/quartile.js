@@ -13,7 +13,7 @@ exports.create = function (data) {
     var quartile = new Quartile(data);
     quartile.save(function (err) {
         if (err) {
-            console.log(err);
+            cs.error(err);
         }
     });
 };

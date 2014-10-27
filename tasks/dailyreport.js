@@ -37,6 +37,10 @@ async.parallel({
     },
     recent7Days: function (cb) {
         quartileController.find7Days(time, function (err, data) {
+			if (err) {
+				cs.error(err);
+				return;
+			}
 			var result = {};
 			var ave = {};
 			_.forEach(data, function (v1, k1) {
@@ -60,6 +64,10 @@ async.parallel({
 		});
     }
 }, function(err, result) {
+	if (err) {
+    	cs.error(err);
+		return;
+	}
 	var r7 = result.recent7Days;
 	result.recent7Days = null;
     cs.info('data read done');
