@@ -2,12 +2,13 @@ var moment = require('moment');
 var mt = require('microtime');
 var _ = require('lodash');
 var argv = require('optimist').argv;
+var auditLog = require('audit-log');
 var mongoose = require('mongoose');
 
 var reader = require('../lib/reader');
 var calc = require('../lib/calc');
 var transfer = require('../lib/transfer');
-var cs = require('../lib/console');
+var cs = require('../config/task-log');
 var config = require('../config/config');
 var out = require('../lib/out');
 
@@ -21,6 +22,7 @@ var endTime;
 var limit = 100;
 var count = 0;
 
+auditLog.addTransport("mongoose", {connectionString: config.db.url});
 mongoose.connect(config.db.url);
 if (env === 'production') {
     limit = 0;

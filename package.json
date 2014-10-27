@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "async": "^0.9.0",
+    "audit-log": "^0.9.1",
     "colors": "^1.0.3",
     "email-templates": "^1.1.2",
     "fast-csv": "^0.5.2",
@@ -24,6 +25,8 @@
     "mongoose-timestamp": "^0.3.0",
     "nodemailer": "^1.3.0",
     "nodemailer-smtp-transport": "^0.1.13",
-    "optimist": "^0.6.1"
+    "optimist": "^0.6.1",
+    "winston": "^0.8.1",
+    "winston-mongodb": "^0.5.2"
   }
 }

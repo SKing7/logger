@@ -5,16 +5,16 @@ var argv = require('optimist').argv;
 var mongoose = require('mongoose');
 var async = require('async');
 
+var env = process.env.NODE_ENV || 'dev';
 var reader = require('../lib/reader');
 var calc = require('../lib/calc');
 var transfer = require('../lib/transfer');
-var cs = require('../lib/console');
 var config = require('../config/config');
+var cs = require('../config/task-log');
 var mail = require('../lib/email');
 var out = require('../lib/out');
 var quartileController = require('../controller/quartile');
 
-var env = process.env.NODE_ENV || 'dev';
 var logConfig = config.log;
 var time = argv.t;
 
