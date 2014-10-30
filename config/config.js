@@ -25,8 +25,8 @@ module.exports = {
     mail: {
 		title: '[速度报表]高德Mo站速度指标报表_',
         templatePath: path.resolve(__dirname + '/../templates') + '/',
-        to: process.env.NODE_ENV === 'production1' ? 'bigdata-mo@autonavi.com' : 'zhe.liu@autonavi.com',
-        cc: process.env.NODE_ENV === 'production1' ? 'Curtis@autonavi.com,zero@autonavi.com,zhe.liu@autonavi.com': '',
+        to: process.env.NODE_ENV === 'production' ? 'bigdata-mo@autonavi.com' : 'zhe.liu@autonavi.com',
+        cc: process.env.NODE_ENV === 'production' ? 'Curtis@autonavi.com,zero@autonavi.com,zhe.liu@autonavi.com': '',
         transport: {
             host: 'smtp.autonavi.com',
             port: 25,
@@ -35,7 +35,6 @@ module.exports = {
             },
             auth: {
                 user: 'zhe.liu@autonavi.com',
-                pass: '' //lZ_123
             }
         }
     },
