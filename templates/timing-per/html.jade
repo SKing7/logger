@@ -4,9 +4,9 @@ html
     meta(name='viewport', content='width=device-width')
     style(type='text/css').
       * {margin:0;padding:0;}
-      @media only screen and (min-device-width: 600px){
+      @media only screen and (min-device-width: 700px){
         .container {
-          max-width:600px!important;
+          max-width:700px!important;
         }
       } 
       .container {
@@ -78,11 +78,12 @@ html
         table
           tr
             th KEY
-            th(width="12%") 指标值(ms)
+            th(width="12%") 指标值<br/>(ms)
             th(width="15%") 环比前一天
             th(width="15%") 同比上周
-            th(width="15%") 同比上月
-            th(width="12%") 周平均(ms)
+            th(width="12%") 同比上月
+            th(width="12%") 周平均<br/>(ms)
+            th(width="15%") 周平均<br/>同比上周
           each v1, k1 in v
             tr
               td !{k1}
@@ -90,7 +91,8 @@ html
               td !{v1.preDay   || '<span class="weaken">N/A</span>'}
               td !{v1.preWeek  || '<span class="weaken">N/A</span>'}
               td !{v1.preMonth || '<span class="weaken">N/A</span>'}
-              td !{rdata[k][k1]}
+              td !{rdata[k][k1] || '<span class="weaken">N/A</span>'}
+              td !{rradio[k][k1] || '<span class="weaken">N/A</span>'}
       h2 相关文档
       ul(class="tip")
         li
