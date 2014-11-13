@@ -1,5 +1,5 @@
 var path = require('path');
-var rtMap = ['rt_index_index', 'rt_search_view', 'rt_search_mapview', 'rt_detail_index', 'rt_navigation_index', 'rt_navigation_buslist'];
+var rtMap = ['rt_index_index', 'rt_search_view', 'rt_search_mapview', 'rt_detail_index', 'rt_navigation_index', 'rt_navigation_buslist', 'rt_index_lbs'];
 var olMap = ['/index/index/', '/search/view/', '/search/mapview/', '/detail/index/', '/navigation/index/', '/navigation/buslist/'];
 var axMap = ['/service/poi/keywords.json', '/service/valueadded/infosearch.json'];
 
@@ -26,12 +26,13 @@ module.exports = {
 		title: '[速度报表]高德Mo站速度指标报表_',
         templatePath: path.resolve(__dirname + '/../templates') + '/',
         to: process.env.NODE_ENV === 'production' ? 'bigdata-mo@autonavi.com' : 'zhe.liu@autonavi.com',
-        cc: process.env.NODE_ENV === 'production' ? 'Curtis@autonavi.com,zero@autonavi.com,zhe.liu@autonavi.com': '',
+        //to: process.env.NODE_ENV === 'production' ? 'bigdata-mo@autonavi.com' : 'zero@autonavi.com',
+        cc: process.env.NODE_ENV === 'production' ? 'Curtis@autonavi.com,zero@autonavi.com,Yuki@autonavi.com,zhao.sun@autonavi.com,zhe.liu@autonavi.com': '',
         transport: {
             host: 'smtp.autonavi.com',
             port: 25,
             tls: {
-                rejectUnauthorized:false
+                rejectUnauthorized: false
             },
             auth: {
                 user: 'zhe.liu@autonavi.com',
@@ -58,15 +59,16 @@ module.exports = {
         	received: 'API Wait Time',
         	done: 'API Receive & Parse Time',
         	total: 'API Total Time',
-        	fs: 'Page First Screen Time',
+        	fs: 'Timing Marks',
 		},
 		keyMap: {
-			'rt_index_index'        : '首页',
-			'rt_search_view'        : '搜索结果列表页',
-			'rt_search_mapview'     : '搜索结果图面页',
-			'rt_detail_index'       : 'POI详情页',
-			'rt_navigation_index'   : '路线首页',
-			'rt_navigation_buslist' : '公交导航结果页',
+			'rt_index_index'        : '首页首屏',
+			'rt_search_view'        : '搜索结果列表页首屏',
+			'rt_search_mapview'     : '搜索结果图面页首屏',
+			'rt_detail_index'       : 'POI详情页首屏',
+			'rt_navigation_index'   : '路线首页首屏',
+			'rt_navigation_buslist' : '公交导航结果页首屏',
+			'rt_index_lbs'          : '首页LBS外链',
 
 			'/index/index/'         : '首页',
 			'/search/view/'         : '搜索结果列表页',
