@@ -4,18 +4,8 @@ html
     meta(name='viewport', content='width=device-width')
     style(type='text/css').
       * {margin:0;padding:0;}
-      @media only screen and (max-device-width: 700px){
-        .container {
-          max-width:2000px!important;
-        }
-      } 
-      @media only screen and (min-device-width: 700px){
-        .container {
-          max-width:700px!important;
-        }
-      } 
       .container {
-        max-width:700px;
+        min-width:500px;
         color:#333;
         font-size:14px; 
         line-height:1.5;
@@ -38,7 +28,7 @@ html
       .p-top-15 {
         padding-top:15px;
       }
-      table{ 
+      table { 
         width:100%!important;
         font-size:12px; 
         box-sizing:border-box;
@@ -77,13 +67,19 @@ html
       .tip li {
         list-style: inside disc;
       }
+    style(type='text/css').
+      @media screen and (min-device-width: 700px){
+        .container {
+          max-width:700px!important;
+        }
+      }
   body
     div.container
       each v, k in data
         h2 #{k}
-        table
+        table(width="100%")
           tr
-            th KEY
+            th(width="19%") KEY
             th(width="12%") 指标值<br/>(ms)
             th(width="15%") 环比前一天
             th(width="15%") 同比上周
