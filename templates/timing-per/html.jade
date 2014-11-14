@@ -5,12 +5,13 @@ html
     style(type='text/css').
       * {margin:0;padding:0;}
       .container {
+        width:750px;
         min-width:500px;
         color:#333;
         font-size:14px; 
         line-height:1.5;
         display:block!important;
-        padding: 15px 30px;
+        padding: 2% 4%;
         clear:both!important;
       }
       h2 { 
@@ -31,17 +32,22 @@ html
       table { 
         width:100%!important;
         font-size:12px; 
+        max-width:750px!important;
         box-sizing:border-box;
         border:1px solid #ddd;
         border-spacing:0;
         border-collapse:collapse;
       }
       th{ 
+        max-width:750px!important;
         box-sizing:border-box;
         padding:7px 5px;
         text-align: center;
         font-weight:bold;
         background:#f8f8f8;
+      }
+      tr{
+        max-width:750px!important;
       }
       td{ 
         padding:7px 5px 10px; 
@@ -68,18 +74,18 @@ html
         list-style: inside disc;
       }
     style(type='text/css').
-      @media screen and (min-device-width: 700px){
+      @media screen and (max-device-width: 699px){
         .container {
-          max-width:750px!important;
+          width:auto!important;
         }
       }
   body
     div.container
       each v, k in data
         h2 #{k}
-        table(width="100%")
+        table
           tr
-            th(width="19%") KEY
+            th KEY
             th(width="12%") 指标值<br/>(ms)
             th(width="15%") 环比前一天
             th(width="15%") 同比上周
