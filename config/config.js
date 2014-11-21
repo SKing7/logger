@@ -61,6 +61,7 @@ module.exports = {
         	total: 'API Total Time',
         	fs: 'Timing Marks',
 		},
+        //TODO #X too ugly
 		keyMap: {
 			'rt_index_index'        : '     首页首屏     ',
 			'rt_search_view'        : '搜索结果列表页首屏',
