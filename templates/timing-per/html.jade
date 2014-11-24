@@ -5,13 +5,13 @@ html
     style(type='text/css').
       * {margin:0;padding:0;}
       .container {
-        width:750px;
+        box-sizing:border-box;
         min-width:500px;
         color:#333;
         font-size:14px; 
         line-height:1.5;
         display:block!important;
-        padding: 2% 4%;
+        padding: 10px 15px;
         clear:both!important;
       }
       h2 { 
@@ -74,9 +74,9 @@ html
         list-style: inside disc;
       }
     style(type='text/css').
-      @media screen and (max-device-width: 699px){
+      @media screen and (min-device-width: 750px){
         .container {
-          width:auto!important;
+            max-width:750px;
         }
       }
   body
