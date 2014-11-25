@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var config = require('../config/config');
+var cs = require('../lib/console');
 var moment = require('moment');
 var logConfig = config.log;
 var Quartile = require('../models/quartile'),
