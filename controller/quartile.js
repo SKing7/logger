@@ -18,6 +18,9 @@ exports.create = function (data) {
         }
     });
 };
+exports.find = function (filter, cb) {
+    Quartile.find(filter).sort('reportDate').exec(cb);
+};
 exports.deleteByDate = function (d, cb) {
     var filter = {reportDate: oneDay(d)}; 
     Quartile.remove(filter).exec(cb);
