@@ -71,6 +71,9 @@ async.parallel({
     cs.info('all data read ready');
     mail.sendPerTiming(rt, r7, radio, time);
     cs.info('mail sended');
+    setTimeout(function () {
+        process.exit();
+    }, 30000)
 });
 function sortAndAlias(rt) {
 	var orderConfig = config.order;

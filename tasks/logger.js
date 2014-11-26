@@ -48,6 +48,9 @@ eacher(function (data) {
     cs.info(count + ' line logs');
     calcHub();
     out.toDb();
+    setTimeout(function () {
+        process.exit();
+    }, 30000)
 });
 function calcHub() {
     calc.rt(timingDb, out);

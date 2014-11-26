@@ -1,6 +1,6 @@
 #!/bin/bash
-cd /home/logger/analyzer
-/usr/local/bin/node tasks/dailyreport.js
+#'/index/index/', '/search/view/', '/search/mapview/', '/detail/index/', '/navigation/index/', '/navigation/buslist/'
+cd /home/logger/analyzer 
 node tasks/pagespeed.js -o page -n '/index/index/'
 node tasks/pagespeed.js -o page -n '/search/view/'
 node tasks/pagespeed.js -o page -n '/search/mapview/'
