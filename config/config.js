@@ -27,7 +27,7 @@ module.exports = {
         templatePath: path.resolve(__dirname + '/../templates') + '/',
         to: process.env.NODE_ENV === 'production' ? 'bigdata-mo@autonavi.com' : 'zhe.liu@autonavi.com',
         //to: process.env.NODE_ENV === 'production' ? 'bigdata-mo@autonavi.com' : 'zero@autonavi.com',
-        cc: process.env.NODE_ENV === 'production' ? 'Curtis@autonavi.com,zero@autonavi.com,Yuki@autonavi.com,zhao.sun@autonavi.com,zhe.liu@autonavi.com': '',
+        cc: process.env.NODE_ENV === 'production' ? 'Curtis@autonavi.com,zero@autonavi.com,Yuki@autonavi.com,zhao.sun@autonavi.com,kangning.liu@autonavi.com,zhe.liu@autonavi.com': '',
         transport: {
             host: 'smtp.autonavi.com',
             port: 25,
