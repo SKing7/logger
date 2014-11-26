@@ -17,7 +17,7 @@ module.exports = {
     },
     log: {
         path: '/opt/webserver/logs/',
-        reportsPath: path.resolve(process.env.NODE_ENV === 'production' ? __dirname + '/../reports' : __dirname + '/..') + '/',
+        reportsPath: __dirname + '/../reports/',
         timestampRegx: 'YYYYMMDD',
         prefix: 'access_',
         separator: '||',

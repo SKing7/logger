@@ -7,23 +7,23 @@ var config = require('../config/config');
 var logConfig = config.log;
 var tRegx = logConfig.timestampRegx;
 var argv = require('optimist').argv;
+var option = argv.o;
 var name = argv.n;
 var quartileController = require('../controller/quartile');
 mongoose.connect(config.db.url);
 outCsv.init(name);
-console.log(name);
-switch (name) {
-    case 'rt_navigation_index':
+switch (option) {
+    case 'rt':
         quartileController.find({name: name}, function (err, rts) {
             if (err) {
                 cs.error(err);
                 return;
             }
-            handleRt(rts);
+            handlePage(rts);
         });
         break;
-    case '/index/index/':
-        quartileController.find({name: name}, function (err, rts) {
+    case 'page':
+        quartileController.find({name: {$in: [name, pg2rt(name)]}}, function (err, rts) {
             if (err) {
                 cs.error(err);
                 return;
@@ -52,8 +52,11 @@ function handlePage(data) {
         _.forEach(v, function (v1) {
             cf[v1.timingType] = v1.value['75']; 
         });
-console.log(cf);
+        cf.dl = cf.dl || 0;
         outCsv.push(cf);
     });
     outCsv.end();
+}
+function pg2rt(pg) {
+    return ('rt' + name).replace(/\//g, '_').substr(0, name.length + 1);
 }
