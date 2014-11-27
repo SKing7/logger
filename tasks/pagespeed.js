@@ -44,15 +44,16 @@ function handleRt(data) {
 function handlePage(data) {
     var cf;
     var rt;
+    var alias = config.alias.timingKeyMap;
     rt = _.groupBy(data, function (v) {
         return moment(v.reportDate).format(tRegx) ;
     });
     _.forEach(rt, function (v, k) {
         cf = {'Date': k};
+        cf[alias.dl] = 0;
         _.forEach(v, function (v1) {
-            cf[v1.timingType] = v1.value['75']; 
+            cf[alias[v1.timingType] || v1.timingType] = v1.value['75']; 
         });
-        cf.dl = cf.dl || 0;
         outCsv.push(cf);
     });
     outCsv.end();
