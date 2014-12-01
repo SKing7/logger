@@ -10,20 +10,15 @@ var argv = require('optimist').argv;
 var option = argv.o;
 var name = argv.n;
 var quartileController = require('../controller/quartile');
+var pageApis = {
+    '/search/view/': ['/service/poi/keywords.json'],
+    '/detail/index/': ['/service/valueadded/infosearch.json'],
+};
 mongoose.connect(config.db.url);
 outCsv.init(name);
 switch (option) {
-    case 'rt':
-        quartileController.find({name: name}, function (err, rts) {
-            if (err) {
-                cs.error(err);
-                return;
-            }
-            handlePage(rts);
-        });
-        break;
     case 'page':
-        quartileController.find({name: {$in: [name, pg2rt(name)]}}, function (err, rts) {
+        quartileController.find({name: { $in: [name, pg2rt(name)].concat(pageApis[name] || []) }}, function (err, rts) {
             if (err) {
                 cs.error(err);
                 return;
@@ -54,6 +49,7 @@ function handlePage(data) {
         _.forEach(v, function (v1) {
             cf[alias[v1.timingType] || v1.timingType] = v1.value['75']; 
         });
+        delete cf[alias.la];
         outCsv.push(cf);
     });
     outCsv.end();

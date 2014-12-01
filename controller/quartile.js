@@ -19,6 +19,7 @@ exports.create = function (data) {
     });
 };
 exports.find = function (filter, cb) {
+console.log(filter);
     Quartile.find(filter).sort('reportDate').exec(cb);
 };
 exports.deleteByDate = function (d, cb) {
