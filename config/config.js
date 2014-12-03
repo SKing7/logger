@@ -29,13 +29,14 @@ module.exports = {
         //to: process.env.NODE_ENV === 'production' ? 'bigdata-mo@autonavi.com' : 'zero@autonavi.com',
         cc: process.env.NODE_ENV === 'production' ? 'Curtis@autonavi.com,zero@autonavi.com,Yuki@autonavi.com,zhao.sun@autonavi.com,kangning.liu@autonavi.com,zhe.liu@autonavi.com': '',
         transport: {
-            host: 'smtp.autonavi.com',
-            port: 25,
+            host: 'smtp.alibaba-inc.com',
+            secure: true,
+            port: 465,
             tls: {
                 rejectUnauthorized: false
             },
             auth: {
-                user: 'zhe.liu@autonavi.com',
+                user: 'opendev_noreply@alibaba-inc.com',
             }
         }
     },
