@@ -3,7 +3,7 @@ var rtMap = ['rt_index_index', 'rt_search_view', 'rt_search_mapview', 'rt_detail
 var olMap = ['/index/index/', '/search/view/', '/search/mapview/', '/detail/index/', '/navigation/index/', '/navigation/buslist/', '/nearby/index/'];
 var axMap = ['/service/poi/keywords.json', '/service/valueadded/infosearch.json'];
 var ssrTiming = ['c_fsp','fsp', 'ssrct', 'fsp_mixed'];
-var olTiming = ['la', 'dl']; //
+var olTiming = ['t_loc_android', 't_loc_ios', 'la', 'dl']; //
 var netTiming = [ 'readyStart', 'redirectTime', 'requestTime', 'initDomTreeTime', 'domReadyTime'];
 var axTiming = ['total', 'received', 'done'];
 
@@ -72,6 +72,8 @@ module.exports = {
         	total: 'API Total Time',
         	fs: 'Timing Marks',
         	cchr: 'Static File Cache Hit Rate',
+        	t_loc_ios: 'iOS Location Cost Time',
+        	t_loc_android: 'Android Location Cost time',
             readyStart: 'Browser Fetch Start Time',
             redirectTime: 'Page Redirect Time',
             requestTime: 'Page Download Time',

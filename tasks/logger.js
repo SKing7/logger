@@ -19,7 +19,7 @@ var eacher;
 var timingDb = {};
 var startTime = mt.now();
 var endTime;
-var limit = 100;
+var limit = 0;
 var count = 0;
 
 auditLog.addTransport("mongoose", {connectionString: config.db.url});
