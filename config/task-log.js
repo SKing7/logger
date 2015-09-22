@@ -5,7 +5,7 @@ var path = require('path');
 var moment = require('moment');
 
 switch (process.env.NODE_ENV) {
-case 'production':
+case 'production1':
     // setup log rotate on production
     winston.remove(winston.transports.Console);
     winston.add(winston.transports.DailyRotateFile, {

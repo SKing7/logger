@@ -4,6 +4,7 @@ html
     meta(name='viewport', content='width=device-width')
     style(type='text/css').
       * {margin:0;padding:0;}
+      .mb20 {margin-bottom: 20px; }
       .container {
         box-sizing:border-box;
         min-width:500px;
@@ -30,27 +31,40 @@ html
       .p-top-15 {
         padding-top:15px;
       }
-      table { 
+      .data-blocker { 
         width:100%!important;
         font-size:12px; 
-        max-width:750px!important;
+        max-width:1000px!important;
         box-sizing:border-box;
         border:1px solid #ddd;
         border-spacing:0;
         border-collapse:collapse;
       }
-      th{ 
-        max-width:750px!important;
+      .img-blocker { 
+        width:100%!important;
+        font-size:12px; 
+        max-width:1200px!important;
+        box-sizing:border-box;
+        border:1px solid #fff;
+        border-spacing:0;
+        border-collapse:collapse;
+      }
+      .img-blocker { width: 100%; heigth: auto;}
+      .img-blocker img { 
+        padding-bottom: 15px;
+      }
+      .data-blocker th { 
+        max-width:800px!important;
         box-sizing:border-box;
         padding:7px 5px;
         text-align: center;
         font-weight:bold;
         background:#f8f8f8;
       }
-      tr{
-        max-width:750px!important;
+      .data-blocker tr{
+        max-width:800px!important;
       }
-      td{ 
+      .data-blocker td{ 
         padding:7px 5px 10px; 
         border:1px solid #ddd; 
         text-align: center; 
@@ -75,35 +89,44 @@ html
         list-style: inside disc;
       }
     style(type='text/css').
-      @media screen and (min-device-width: 750px){
+      @media screen and (min-device-width: 800px){
         .container {
-            max-width:750px;
+            max-width:800px;
         }
       }
   body
     div.container
+      h3(class="mb20") 各页面首屏性能指标30天走势(需内网)
+      table(class="img-blocker")
+        tr
+          td
+            each v in imgData
+              img(width="100%" src="#{v}")
       h3
-        a(href='http://10.16.28.75:3000/hub.html') 点击进入"页面性能指标图表"聚合页
+        a(href='http://10.16.28.75:3000/hub.html') 点击查看性能指标走势图
       each v, k in data
         h2 #{k}
-        table
+        table(class="data-blocker")
           tr
             th KEY
-            th(width="12%") 指标值<br/>(ms)
-            th(width="15%") 环比前一天
-            th(width="15%") 同比上周
-            th(width="12%") 同比上月
-            th(width="12%") 周平均<br/>(ms)
-            th(width="15%") 周平均<br/>同比上周
+            th(width="15%") 指标值<br/>
+            th(width="10%") 环比前一天
+            th(width="10%") 同比上周
+            th(width="10%") 同比上月
+            th(width="15%") 周平均<br/>
+            th(width="10%") 周平均<br/>同比上周
+            th(width="15%") 样本数
           each v1, k1 in v
-            tr
-              td !{k1}
-              td !{v1.thatDay  || '<span class="weaken">N/A</span>'}
-              td !{v1.preDay   || '<span class="weaken">N/A</span>'}
-              td !{v1.preWeek  || '<span class="weaken">N/A</span>'}
-              td !{v1.preMonth || '<span class="weaken">N/A</span>'}
-              td !{rdata[k][k1] || '<span class="weaken">N/A</span>'}
-              td !{rradio[k][k1] || '<span class="weaken">N/A</span>'}
+            if v1.thatDay
+              tr
+                td !{k1}
+                td !{v1.thatDay && v1.thatDay.data  || '<span class="weaken">N/A</span>'}
+                td !{v1.preDay   || '<span class="weaken">N/A</span>'}
+                td !{v1.preWeek  || '<span class="weaken">N/A</span>'}
+                td !{v1.preMonth || '<span class="weaken">N/A</span>'}
+                td !{rdata[k][k1] || '<span class="weaken">N/A</span>'}
+                td !{rradio[k][k1] || '<span class="weaken">N/A</span>'}
+                td !{v1.thatDay && v1.thatDay.count  || '<span class="weaken">N/A</span>'}
       h2 相关文档
       ul(class="tip")
         li

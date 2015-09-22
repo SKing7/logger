@@ -15,10 +15,13 @@ var pageApis = {
     '/detail/index/': ['/service/valueadded/infosearch.json'],
 };
 mongoose.connect(config.db.url);
-outCsv.init(name);
 switch (option) {
     case 'page':
-        quartileController.find({name: { $in: [name, pg2rt(name)].concat(pageApis[name] || []) }}, function (err, rts) {
+        outCsv.init(name);
+        quartileController.find({
+            name: { $in: [name, pg2rt(name)].concat(pageApis[name] || []) },
+            timingType: { $in: config.showInChart },
+        }, function (err, rts) {
             if (err) {
                 cs.error(err);
                 return;
@@ -26,15 +29,20 @@ switch (option) {
             handlePage(rts);
         });
         break;
-}
-function handleRt(data) {
-    var cf;
-    _.forEach(data, function (v) {
-        var cf = { 'Date': moment(v.reportDate).format(tRegx), };
-        cf.A = v.value['75']; 
-        outCsv.push(cf);
-    });
-    outCsv.end();
+    case 'page_30d':
+        outCsv.init(name + '30d');
+        quartileController.find({
+            name: { $in: [name, pg2rt(name)].concat(pageApis[name] || []) },
+            timingType: { $in: config.showInChart },
+            reportDate: { $gt: new Date(moment().subtract(31, 'days')), $lt: new Date() },
+        }, function (err, rts) {
+            if (err) {
+                cs.error(err);
+                return;
+            }
+            handlePage(rts);
+        });
+        break;
 }
 function handlePage(data) {
     var cf;
@@ -46,6 +54,7 @@ function handlePage(data) {
     _.forEach(rt, function (v, k) {
         cf = {'Date': k};
         cf[alias.dl] = 0;
+        cf[alias.c_fsp] = 0;
         _.forEach(v, function (v1) {
             cf[alias[v1.timingType] || v1.timingType] = v1.value['75']; 
         });

@@ -20,6 +20,9 @@ var QuartileSchema = new Schema({
     timingType: {
         type: String,
     },
+    sampleCount: {
+        type: Number,
+    },
     type: {
         type: String,
     },

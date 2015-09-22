@@ -63,11 +63,11 @@ async.parallel({
 	result.recent7Days = null;
 	result.preRecent7Days = null;
     cs.info('data read done');
+    radio = sortAndAlias(radio);
+    r7 = sortAndAlias(r7);
     var rt = dataProto(result);
     rt = calc.relativeRadio(rt);
     rt = sortAndAlias(rt);
-    r7 = sortAndAlias(r7);
-    radio = sortAndAlias(radio);
     cs.info('all data read ready');
     mail.sendPerTiming(rt, r7, radio, time);
     cs.info('mail sended');
@@ -120,7 +120,10 @@ function dataProto(result) {
                     timingType = v3.timingType;
                     rt[timingType] = rt[timingType] || {};
                     rt[timingType][k2] = rt[timingType][k2] || {};
-                    rt[timingType][k2][k] = v3.value[config.primaryPer * 100];
+                    rt[timingType][k2][k] = {
+                        data: v3.value[(config.primaryPer)* 100] || v3.value.avg,
+                        count: v3.sampleCount
+                    }
                 });
             });
         });

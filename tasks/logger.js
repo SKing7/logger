@@ -33,7 +33,6 @@ if (!time) {
 out.init({
     time: time
 });
-
 eacher = reader.eacher(time);
 eacher(function (data) {
     if (limit && count > limit) return false;
@@ -43,6 +42,7 @@ eacher(function (data) {
     }
     count++;
 }).then(function () {
+    transfer.combineIndicator(timingDb);
     endTime = mt.now();
     cs.info('read use time: ' + (endTime - startTime));
     cs.info(count + ' line logs');
@@ -50,10 +50,12 @@ eacher(function (data) {
     out.toDb();
     setTimeout(function () {
         process.exit();
-    }, 30000)
+    }, 10000)
 });
 function calcHub() {
     calc.rt(timingDb, out);
     calc.ol(timingDb, out);
     calc.ax(timingDb, out);
+    calc.ex(timingDb, out);
+    calc.combine(timingDb, out);
 }
