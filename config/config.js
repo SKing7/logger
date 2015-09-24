@@ -6,6 +6,7 @@ var ssrTiming = ['c_fsp','fsp', 'ssrct', 'fsp_mixed'];
 var olTiming = ['t_loc_android', 't_loc_ios', 'la', 'dl']; //
 var netTiming = [ 'readyStart', 'redirectTime', 'requestTime', 'initDomTreeTime', 'domReadyTime'];
 var axTiming = ['total', 'received', 'done'];
+var exTiming = ['cchr', 'loc_android', 'loc_ios'];
 
 module.exports = {
 	runningLog: {
@@ -54,11 +55,11 @@ module.exports = {
         },
 	},
 	order: {
-	    timingTypesOrder: ['c_fsp', 'fs'].concat(ssrTiming.slice(1), ['cchr'], olTiming, axTiming, netTiming),
+	    timingTypesOrder: ['c_fsp', 'fs'].concat(ssrTiming.slice(1), exTiming, olTiming, axTiming, netTiming),
 	    keysOrder:  olMap.concat(rtMap, axMap) 
 	},
     higherBetter: ['cchr'],
-    timingValueIsPercent: ['cchr'],
+    timingValueIsPercent: exTiming,
     alias: {
 		timingKeyMap: {
         	la: 'Page Load Time',
