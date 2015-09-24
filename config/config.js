@@ -1,11 +1,13 @@
 var path = require('path');
 var rtMap = ['rt_index_index', 'rt_search_view', 'rt_search_mapview', 'rt_detail_index', 'rt_navigation_index', 'rt_navigation_buslist', 'rt_nearby_index'];
 var olMap = ['/index/index/', '/search/view/', '/search/mapview/', '/detail/index/', '/navigation/index/', '/navigation/buslist/', '/nearby/index/'];
+var imMap = ['/index/index/', '/search/view/', '/search/mapview/', '/detail/index/', '/navigation/index/', '/navigation/buslist/', '/nearby/index/'];
 var axMap = ['/service/poi/keywords.json', '/service/valueadded/infosearch.json'];
 var ssrTiming = ['c_fsp','fsp', 'ssrct', 'fsp_mixed'];
-var olTiming = ['t_loc_android', 't_loc_ios', 'la', 'dl']; //
+var olTiming = ['la', 'dl']; //
 var netTiming = [ 'readyStart', 'redirectTime', 'requestTime', 'initDomTreeTime', 'domReadyTime'];
 var axTiming = ['total', 'received', 'done'];
+var locTiming = ['t_loc_android', 't_loc_ios', ];
 var exTiming = ['cchr', 'loc_android_ip_failure', 'loc_ios_ip_failure', 'loc_android_other_failure', 'loc_ios_other_failure'];
 
 module.exports = {
@@ -48,6 +50,7 @@ module.exports = {
 	limit: {
         keyMap: {
             ol: olMap,
+            im: imMap,
         },
         timingKeyMap: {
             ol: olTiming.concat(ssrTiming, netTiming),
@@ -55,7 +58,7 @@ module.exports = {
         },
 	},
 	order: {
-	    timingTypesOrder: ['c_fsp', 'fs'].concat(ssrTiming.slice(1), exTiming, olTiming, axTiming, netTiming),
+	    timingTypesOrder: ['c_fsp', 'fs'].concat(ssrTiming.slice(1), locTiming, exTiming, olTiming, axTiming, netTiming),
 	    keysOrder:  olMap.concat(rtMap, axMap) 
 	},
     higherBetter: ['cchr'],

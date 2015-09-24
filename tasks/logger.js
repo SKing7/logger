@@ -56,6 +56,8 @@ function calcHub() {
     calc.rt(timingDb, out);
     calc.ol(timingDb, out);
     calc.ax(timingDb, out);
+    calc.im(timingDb, out);
+    calc.im_c(timingDb, out);
     calc.ex(timingDb, out);
     calc.combine(timingDb, out);
 }
