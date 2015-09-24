@@ -6,7 +6,7 @@ var ssrTiming = ['c_fsp','fsp', 'ssrct', 'fsp_mixed'];
 var olTiming = ['t_loc_android', 't_loc_ios', 'la', 'dl']; //
 var netTiming = [ 'readyStart', 'redirectTime', 'requestTime', 'initDomTreeTime', 'domReadyTime'];
 var axTiming = ['total', 'received', 'done'];
-var exTiming = ['cchr', 'loc_android', 'loc_ios'];
+var exTiming = ['cchr', 'loc_android_ip_failure', 'loc_ios_ip_failure', 'loc_android_other_failure', 'loc_ios_other_failure'];
 
 module.exports = {
 	runningLog: {
@@ -73,6 +73,10 @@ module.exports = {
         	total: 'API Total Time',
         	fs: 'Timing Marks',
         	cchr: 'Static File Cache Hit Rate',
+            loc_ios_ip_failure: 'iOS IP Location Failure',
+            loc_ios_other_failure: 'iOS Other Location Failure',
+            loc_android_ip_failure: 'Android IP Location Failure',
+            loc_android_other_failure: 'Android Other Location Failure',
         	t_loc_ios: 'iOS Location Cost Time',
         	t_loc_android: 'Android Location Cost time',
             readyStart: 'Browser Fetch Start Time',
