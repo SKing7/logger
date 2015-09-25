@@ -7,8 +7,10 @@ var ssrTiming = ['c_fsp','fsp', 'ssrct', 'fsp_mixed'];
 var olTiming = ['la', 'dl']; //
 var netTiming = [ 'readyStart', 'redirectTime', 'requestTime', 'initDomTreeTime', 'domReadyTime'];
 var axTiming = ['total', 'received', 'done'];
-var locTiming = ['t_loc_android', 't_loc_ios', ];
-var exTiming = ['cchr', 'loc_android_ip_failure', 'loc_ios_ip_failure', 'loc_android_other_failure', 'loc_ios_other_failure'];
+var imTiming = [
+//'t_loc_android', 't_loc_ios','loc_android_ip_failure', 'loc_ios_ip_failure', 'loc_android_other_failure', 'loc_ios_other_failure' 
+];
+var exTiming = ['cchr'];
 
 module.exports = {
 	runningLog: {
@@ -58,7 +60,7 @@ module.exports = {
         },
 	},
 	order: {
-	    timingTypesOrder: ['c_fsp', 'fs'].concat(ssrTiming.slice(1), locTiming, exTiming, olTiming, axTiming, netTiming),
+	    timingTypesOrder: ['c_fsp', 'fs'].concat(ssrTiming.slice(1), exTiming, imTiming, olTiming, axTiming, netTiming),
 	    keysOrder:  olMap.concat(rtMap, axMap) 
 	},
     higherBetter: ['cchr'],
