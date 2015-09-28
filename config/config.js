@@ -8,7 +8,7 @@ var olTiming = ['la', 'dl']; //
 var netTiming = [ 'readyStart', 'redirectTime', 'requestTime', 'initDomTreeTime', 'domReadyTime'];
 var axTiming = ['total', 'received', 'done'];
 var imTiming = [
-//'t_loc_android', 't_loc_ios','loc_android_ip_failure', 'loc_ios_ip_failure', 'loc_android_other_failure', 'loc_ios_other_failure' 
+'t_loc_android', 't_loc_ios','loc_android_ip_failure', 'loc_ios_ip_failure', 'loc_android_other_failure', 'loc_ios_other_failure' 
 ];
 var exTiming = ['cchr'];
 
