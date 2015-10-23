@@ -8,7 +8,11 @@ var olTiming = ['la', 'dl']; //
 var netTiming = [ 'readyStart', 'redirectTime', 'requestTime', 'initDomTreeTime', 'domReadyTime'];
 var axTiming = ['total', 'received', 'done'];
 var imTiming = [
-'t_loc_android', 't_loc_ios','loc_android_ip_failure', 'loc_ios_ip_failure', 'loc_android_other_failure', 'loc_ios_other_failure' 
+'t_loc_android', 't_loc_ios','loc_android_ip_failure', 'loc_ios_ip_failure', 'loc_android_other_failure', 'loc_ios_other_failure', 
+'loc_android_glh_success', 'loc_ios_glh_success', 
+'loc_android_ugi_success', 'loc_ios_ugi_success', 
+'loc_android_ams_success',
+//'loc_ios_ams_success', 
 ];
 var exTiming = ['cchr'];
 
@@ -82,6 +86,12 @@ module.exports = {
             loc_ios_other_failure: 'iOS Other Location Failure',
             loc_android_ip_failure: 'Android IP Location Failure',
             loc_android_other_failure: 'Android Other Location Failure',
+            loc_android_glh_success: 'Android HTML5 GeoLocaltion Success Rate' , 
+            loc_ios_glh_success: 'iOS HTML5 GeoLocaltion Success Rate', 
+            loc_android_ugi_success: 'Android UC GI Location Success Rate',
+            loc_ios_ugi_success: 'iOS UC GI Location Success Rate', 
+            loc_android_ams_success: 'Android AMP Service Location Success Rate',
+            //loc_ios_ams_success: 'iOS AMP Service Location Success Rate',
         	t_loc_ios: 'iOS Location Cost Time',
         	t_loc_android: 'Android Location Cost time',
             readyStart: 'Browser Fetch Start Time',
