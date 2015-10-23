@@ -82,7 +82,6 @@ function sortAndAlias(rt) {
 	var aliased = {};
 	//timing: {}
 	var ordered = {};
-    console.log(JSON.stringify(rt));
 	_.forEach(orderConfig.timingTypesOrder, function (v, k) {
 		if (rt[v]) {
 			ordered[v] = rt[v];
