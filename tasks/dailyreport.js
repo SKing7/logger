@@ -14,6 +14,7 @@ var cs = require('../config/task-log');
 var mail = require('../lib/email');
 var out = require('../lib/out');
 var quartileController = require('../controller/quartile');
+var pageLimit = config.limit.keyMap;
 
 var logConfig = config.log;
 var time = argv.t;
@@ -58,6 +59,8 @@ async.parallel({
     	cs.error(err);
 		return;
 	}
+    var indexCollections = collectedIndex(result.thatDay);
+
 	var r7 = result.recent7Days;
 	var radio = calc.timingRadio(result.preRecent7Days, r7);
 	result.recent7Days = null;
@@ -69,12 +72,43 @@ async.parallel({
     rt = calc.relativeRadio(rt);
     rt = sortAndAlias(rt);
     cs.info('all data read ready');
-    mail.sendPerTiming(rt, r7, radio, time);
+    mail.sendPerTiming(rt, r7, radio, time, indexCollections);
     cs.info('mail sended');
     setTimeout(function () {
         process.exit();
     }, 30000)
 });
+function collectedIndex(data) {
+    return {
+        locationRate: structureLocData(data)
+    };
+}
+function structureLocData(data) {
+    var locationPages = pageLimit.im;
+    data = _.filter(data, function (v) {
+        return v.timingType.indexOf('loc_') === 0
+    });
+    var groupedData = _.groupBy(data, function (v) {
+        return v.timingType.match(/^loc_([^_]*)_/)[1]
+    });
+    var tmpRt;
+    _.forEach(groupedData, function (dataByOs, os) {
+        tmpRt = {};
+        //按页面分组
+        var tmp = _.groupBy(dataByOs, 'name');
+        _.forEach(tmp, function (dataByPage, page) {
+            var tmpPageRt = {};
+            if (locationPages.indexOf(page) < 0) { return;};
+            _.forEach(dataByPage, function (v) {
+                tmpPageRt[v.timingType] = v.value.avg;
+            });
+            tmpRt[page] = tmpPageRt;
+        });
+        groupedData[os] = tmpRt;
+    });
+
+    return groupedData;
+}
 function sortAndAlias(rt) {
 	var orderConfig = config.order;
 	var timingAlias = config.alias.timingKeyMap;
@@ -106,7 +140,6 @@ function dataProto(result) {
     var rt = {};
     var timingType;
 
-    var baseData = result.thatDay;
     //date
     _.forEach(result, function (v, k) {
         //rt ol

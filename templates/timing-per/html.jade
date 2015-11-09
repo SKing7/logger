@@ -127,6 +127,23 @@ html
                 td !{rdata[k][k1] || '<span class="weaken">N/A</span>'}
                 td !{rradio[k][k1] || '<span class="weaken">N/A</span>'}
                 td !{v1.thatDay && v1.thatDay.count  || '<span class="weaken">N/A</span>'}
+      each v, k in indexCollections.locationRate
+        h2 #{k}
+        table(class="data-blocker")
+          tr
+            th Page
+            th(width="22%") HTML5定位成功率<br/>
+            th(width="22%") UC GeoLocation定位成功率
+            th(width="22%") AMS定位成功率
+          each v1, k1 in v
+            tr
+              td !{k1}
+              - var name = 'loc_' + k + '_glh_success';
+              td !{v1[name] || 'N/A'}
+              - var name = 'loc_' + k + '_ugi_success';
+              td !{v1[name] || 'N/A'}
+              - var name = 'loc_' + k + '_ams_success';
+              td !{v1[name] || 'N/A'}
       h2 相关文档
       ul(class="tip")
         li

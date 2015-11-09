@@ -8,11 +8,11 @@ var olTiming = ['la', 'dl']; //
 var netTiming = [ 'readyStart', 'redirectTime', 'requestTime', 'initDomTreeTime', 'domReadyTime'];
 var axTiming = ['total', 'received', 'done'];
 var imTiming = [
-'t_loc_android', 't_loc_ios','loc_android_ip_failure', 'loc_ios_ip_failure', 'loc_android_other_failure', 'loc_ios_other_failure', 
-'loc_android_glh_success', 'loc_ios_glh_success', 
-'loc_android_ugi_success', 'loc_ios_ugi_success', 
-'loc_android_ams_success',
-//'loc_ios_ams_success', 
+'t_loc_android', 'loc_android_ip_failure','loc_android_other_failure',
+'loc_android_glh_success',  'loc_android_ugi_success','loc_android_ams_success',
+'t_loc_ios', 'loc_ios_ip_failure', 'loc_ios_other_failure', 
+'loc_ios_glh_success', 'loc_ios_ugi_success',
+//'loc_ios_ams_success',
 ];
 var exTiming = ['cchr'];
 
