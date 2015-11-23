@@ -96,12 +96,13 @@ html
       }
   body
     div.container
-      h3(class="mb20") 各页面首屏性能指标30天走势(需内网)
-      table(class="img-blocker")
-        tr
-          td
-            each v in imgData
-              img(width="100%" src="#{v}")
+      if imgData.length
+        h3(class="mb20") 各页面首屏性能指标30天走势(需内网)
+        table(class="img-blocker")
+          tr
+            td
+              each v in imgData
+                img(width="100%" src="#{v}")
       h3
         a(href='http://10.16.28.75:3000/hub.html') 点击查看性能指标走势图
       each v, k in data
@@ -127,23 +128,24 @@ html
                 td !{rdata[k][k1] || '<span class="weaken">N/A</span>'}
                 td !{rradio[k][k1] || '<span class="weaken">N/A</span>'}
                 td !{v1.thatDay && v1.thatDay.count  || '<span class="weaken">N/A</span>'}
-      each v, k in indexCollections.locationRate
-        h2 #{k}(以下指标是各定位方式成功率的占比情况，仅供开发者参考)
-        table(class="data-blocker")
-          tr
-            th Page
-            th(width="22%") HTML5定位成功占比<br/>
-            th(width="22%") UC GeoLocation定位成功占比
-            th(width="22%") AMS定位成功占比
-          each v1, k1 in v
+      if indexCollections
+        each v, k in indexCollections.locationRate
+          h2 #{k}(以下指标是各定位方式成功率的占比情况，仅供开发者参考)
+          table(class="data-blocker")
             tr
-              td !{k1}
-              - var name = 'loc_' + k + '_glh_success';
-              td !{v1[name] || 'N/A'}
-              - var name = 'loc_' + k + '_ugi_success';
-              td !{v1[name] || 'N/A'}
-              - var name = 'loc_' + k + '_ams_success';
-              td !{v1[name] || 'N/A'}
+              th Page
+              th(width="22%") HTML5定位成功占比<br/>
+              th(width="22%") UC GeoLocation定位成功占比
+              th(width="22%") AMS定位成功占比
+            each v1, k1 in v
+              tr
+                td !{k1}
+                - var name = 'loc_' + k + '_glh_success';
+                td !{v1[name] || 'N/A'}
+                - var name = 'loc_' + k + '_ugi_success';
+                td !{v1[name] || 'N/A'}
+                - var name = 'loc_' + k + '_ams_success';
+                td !{v1[name] || 'N/A'}
       h2 相关文档
       ul(class="tip")
         li
