@@ -12,9 +12,12 @@ var transfer = require('../lib/transfer');
 var config = require('../config/config');
 var cs = require('../config/task-log');
 var mail = require('../lib/email');
+var util = require('../lib/util');
+var structData = require('../lib/structData');
 var out = require('../lib/out');
 var quartileController = require('../controller/quartile');
-var pageLimit = config.limit.keyMap;
+var sortAndAliasTimingType = util.sortAndAliasTimingType;
+var structDataForReport = structData.pickDataforReport;
 
 var logConfig = config.log;
 var time = argv.t;
@@ -59,107 +62,33 @@ async.parallel({
     	cs.error(err);
 		return;
 	}
-    var indexCollections = collectedIndex(result.thatDay);
-
-	var r7 = result.recent7Days;
-	var radio = calc.timingRadio(result.preRecent7Days, r7);
-	result.recent7Days = null;
-	result.preRecent7Days = null;
     cs.info('data read done');
-    radio = sortAndAlias(radio);
-    r7 = sortAndAlias(r7);
-    var rt = dataProto(result);
+    var recent7DaysRt = getRecent7DaysDataArgs(result);
+
+    var rt = structDataForReport(result);
     rt = calc.relativeRadio(rt);
-    rt = sortAndAlias(rt);
+    rt = sortAndAliasTimingType(rt);
     cs.info('all data read ready');
-    mail.sendPerTiming(rt, r7, radio, time, indexCollections);
+    mail.sendPerTiming.apply(mail, recent7DaysRt.concat([rt, time, collectedIndex(result)]));
     cs.info('mail sended');
     setTimeout(function () {
         process.exit();
     }, 30000)
 });
-function collectedIndex(data) {
-    return {
-        locationRate: structureLocData(data)
+function getRecent7DaysDataArgs (result) {
+	var ratio = calc.timingRadio(result.preRecent7Days, result.recent7Days);
+    ratio = sortAndAliasTimingType(ratio);
+
+    var r7Data = sortAndAliasTimingType(result.recent7Days);
+
+	result.preRecent7Days = null;
+	result.recent7Days = null;
+
+    return [r7Data, ratio];
+} 
+function collectedIndex(result) {
+    var indexCollections = {
+        locationRate: structData.locationData(result.thatDay)
     };
-}
-function structureLocData(data) {
-    var locationPages = pageLimit.im;
-    data = _.filter(data, function (v) {
-        return v.timingType.indexOf('loc_') === 0
-    });
-    var groupedData = _.groupBy(data, function (v) {
-        return v.timingType.match(/^loc_([^_]*)_/)[1]
-    });
-    var tmpRt;
-    _.forEach(groupedData, function (dataByOs, os) {
-        tmpRt = {};
-        //按页面分组
-        var tmp = _.groupBy(dataByOs, 'name');
-        _.forEach(tmp, function (dataByPage, page) {
-            var tmpPageRt = {};
-            if (locationPages.indexOf(page) < 0) { return;};
-            _.forEach(dataByPage, function (v) {
-                tmpPageRt[v.timingType] = v.value.avg;
-            });
-            tmpRt[page] = tmpPageRt;
-        });
-        groupedData[os] = tmpRt;
-    });
-
-    return groupedData;
-}
-function sortAndAlias(rt) {
-	var orderConfig = config.order;
-	var timingAlias = config.alias.timingKeyMap;
-	var keyAlias = config.alias.keyMap;
-	var aliased = {};
-	//timing: {}
-	var ordered = {};
-	_.forEach(orderConfig.timingTypesOrder, function (v, k) {
-		if (rt[v]) {
-			ordered[v] = rt[v];
-		}
-	});
-	rt = ordered;
-	_.forEach(rt, function (v1, k1) {
-		ordered = {};
-		//k1: fs,waiting
-		_.forEach(orderConfig.keysOrder, function (v2, k2) {
-			if (v1[v2]) {
-				ordered[keyAlias[v2] || v2] = v1[v2];
-			}
-		});
-		aliased[timingAlias[k1] || k1] = ordered;
-	})
-	return aliased;
-}
-function dataProto(result) {
-    var pdType;
-    var pdName;
-    var rt = {};
-    var timingType;
-
-    //date
-    _.forEach(result, function (v, k) {
-        //rt ol
-        pdType = _.groupBy(v, 'type');
-        _.forEach(pdType, function (v1, k1) {
-            //name: /index/index....
-            pdName = _.groupBy(v1, 'name');
-            _.forEach(pdName, function (v2, k2) {
-                // wating,loading,fs,.....
-                _.forEach(v2, function (v3, k3) {
-                    timingType = v3.timingType;
-                    rt[timingType] = rt[timingType] || {};
-                    rt[timingType][k2] = rt[timingType][k2] || {};
-                    rt[timingType][k2][k] = {
-                        data: v3.value[(config.primaryPer)* 100] || v3.value.avg,
-                        count: v3.sampleCount
-                    }
-                });
-            });
-        });
-    });
-    return rt;
+    return indexCollections;
 }
