@@ -7,7 +7,7 @@ var config = require('../config/config');
 var cs = require('../lib/console');
 var moment = require('moment');
 var logConfig = config.log;
-var aid = config.aid;
+var aid = config.aid + '';
 var Quartile = require('../models/quartile'),
     _ = require('lodash');
 
