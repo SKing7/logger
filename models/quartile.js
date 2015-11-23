@@ -26,6 +26,9 @@ var QuartileSchema = new Schema({
     type: {
         type: String,
     },
+    aid: {
+        type: String,
+    },
 });
 QuartileSchema.plugin(TimeStampPlugin, {
     createdAt: 'gmtCreated',

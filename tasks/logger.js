@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 
 var reader = require('../lib/reader');
 var calc = require('../lib/calc');
+var util = require('../lib/util');
 var transfer = require('../lib/transfer');
 var cs = require('../config/task-log');
 var config = require('../config/config');
@@ -16,10 +17,9 @@ var env = process.env.NODE_ENV || 'dev';
 var logConfig = config.log;
 var time = argv.t;
 var eacher;
-var timingDb = {};
 var startTime = mt.now();
 var endTime;
-var limit = 0;
+var limit = 10000;
 var count = 0;
 
 auditLog.addTransport("mongoose", {connectionString: config.db.url});
@@ -38,26 +38,33 @@ eacher(function (data) {
     if (limit && count > limit) return false;
     var type = data.tp;
     if (_.isFunction(transfer[type])) {
-        transfer[type](timingDb, data);
+        transfer[type](util.getDbByLineData(data), data);
     }
     count++;
 }).then(function () {
-    transfer.combineIndicator(timingDb);
+    var keys = util.getKeys();
     endTime = mt.now();
     cs.info('read use time: ' + (endTime - startTime));
     cs.info(count + ' line logs');
-    calcHub();
-    out.toDb();
+    var allDbs = util.getAllDbs();
+    allDbs.forEach(function (v) {
+        var db = v.instance;
+        transfer.combineIndicator(db);
+        calcHub(db, out);
+        out.toDb(_.pick(v, keys));
+    });
+    //TODO
     setTimeout(function () {
         process.exit();
     }, 10000)
+
+    function calcHub(timingDb, out) {
+        calc.rt(timingDb, out);
+        calc.ol(timingDb, out);
+        calc.ax(timingDb, out);
+        calc.im(timingDb, out);
+        //calc.im_c(timingDb, out);
+        calc.ex(timingDb, out);
+        calc.combine(timingDb, out);
+    }
 });
-function calcHub() {
-    calc.rt(timingDb, out);
-    calc.ol(timingDb, out);
-    calc.ax(timingDb, out);
-    calc.im(timingDb, out);
-    //calc.im_c(timingDb, out);
-    calc.ex(timingDb, out);
-    calc.combine(timingDb, out);
-}
