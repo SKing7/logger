@@ -128,13 +128,13 @@ html
                 td !{rradio[k][k1] || '<span class="weaken">N/A</span>'}
                 td !{v1.thatDay && v1.thatDay.count  || '<span class="weaken">N/A</span>'}
       each v, k in indexCollections.locationRate
-        h2 #{k}
+        h2 #{k}(以下指标是各定位方式成功率的占比情况，仅供开发者参考)
         table(class="data-blocker")
           tr
             th Page
-            th(width="22%") HTML5定位成功率<br/>
-            th(width="22%") UC GeoLocation定位成功率
-            th(width="22%") AMS定位成功率
+            th(width="22%") HTML5定位成功占比<br/>
+            th(width="22%") UC GeoLocation定位成功占比
+            th(width="22%") AMS定位成功占比
           each v1, k1 in v
             tr
               td !{k1}
