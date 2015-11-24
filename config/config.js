@@ -1,5 +1,6 @@
 var path = require('path');
 var _ = require('lodash');
+var util = require('../lib/util');
 
 var site =  process.env.SITE || 'm';
 
@@ -57,15 +58,7 @@ var defaultConfig = {
     screenShotImgs: []
 }
 var siteConfig = require('./' + site + '.js')
-var configFinal = _.merge(defaultConfig, siteConfig, function(a, b) {
-    var rt;
-    if (_.isArray(a)) {
-        rt = a.concat(b);
-    } else if (_.isObject(a)){
-        rt = _.merge(a, b);
-    }
-    return rt;
-});
+var configFinal = util.mergeDeep(defaultConfig, siteConfig)
 configFinal = Object.freeze(configFinal)
 
 module.exports = configFinal;
