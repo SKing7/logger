@@ -1,8 +1,8 @@
 var path = require('path');
 var _ = require('lodash');
 var util = require('../lib/util');
-
-var site =  process.env.SITE || 'm';
+var secret = util.getSecretConf();
+var site = util.getSiteLabel();
 
 var defaultConfig = {
 	runningLog: {
@@ -34,6 +34,7 @@ var defaultConfig = {
             },
             auth: {
                 user: 'opendev_noreply@alibaba-inc.com',
+                pass: secret.p 
             }
         }
     },

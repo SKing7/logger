@@ -15,6 +15,9 @@ var imTiming = [
 //'loc_ios_ams_success',
 ];
 var exTiming = ['cchr'];
+var util = require('../lib/util');
+var secret = util.getSecretConf();
+var env = util.getNodeEnv();
 
 module.exports = {
     aid : 1,
@@ -22,8 +25,8 @@ module.exports = {
     mail: {
 		title: '[速度报表]高德M站速度指标报表_',
         templatePath: path.resolve(__dirname + '/../templates') + '/',
-        to: process.env.NODE_ENV === 'production' ? 'amap-web-m@list.alibaba-inc.com' : 'liuzhe.pt@alibaba-inc.com',
-        cc: process.env.NODE_ENV === 'production' ? 'tongyao.ty@alibaba-inc.com,shaohang.ysh@alibaba-inc.com,yuki@alibaba-inc.com,sunzhao.szh@alibaba-inc.com,wangxing.wangx@alibaba-inc.com,cuifang.gcf@alibaba-inc.com,liuzhe.pt@alibaba-inc.com': '',
+        to:  secret.to[env],
+        cc:  secret.cc[env],
     },
 	limit: {
         keyMap: {
