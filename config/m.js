@@ -24,17 +24,6 @@ module.exports = {
         templatePath: path.resolve(__dirname + '/../templates') + '/',
         to: process.env.NODE_ENV === 'production' ? 'amap-web-m@list.alibaba-inc.com' : 'liuzhe.pt@alibaba-inc.com',
         cc: process.env.NODE_ENV === 'production' ? 'tongyao.ty@alibaba-inc.com,shaohang.ysh@alibaba-inc.com,yuki@alibaba-inc.com,sunzhao.szh@alibaba-inc.com,wangxing.wangx@alibaba-inc.com,cuifang.gcf@alibaba-inc.com,liuzhe.pt@alibaba-inc.com': '',
-        transport: {
-            host: 'smtp.alibaba-inc.com',
-            secure: true,
-            port: 465,
-            tls: {
-                rejectUnauthorized: false
-            },
-            auth: {
-                user: 'opendev_noreply@alibaba-inc.com',
-            }
-        }
     },
 	limit: {
         keyMap: {
@@ -107,7 +96,5 @@ module.exports = {
 			'/service/valueadded/infosearch.json'  : 'POI详情数据',
 		},
     },
-    pers: [0.05,0.15,0.25,0.35,0.45,0.55,0.65,0.75,0.85, 0.95, 1],
-    primaryPer: 0.75,
     screenShotImgs: [ 'index_index', 'detail_index', 'navigation_index', 'navigation_buslist', 'search_view', 'search_mapview']
 }

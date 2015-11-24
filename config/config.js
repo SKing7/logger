@@ -49,14 +49,23 @@ var defaultConfig = {
     higherBetter: [],
     timingValueIsPercent: [],
     alias: {
-		timingKeyMap: {
-		},
-		keyMap: {
-		},
+		timingKeyMap: {},
+		keyMap: {},
     },
     pers: [0.05,0.15,0.25,0.35,0.45,0.55,0.65,0.75,0.85, 0.95, 1],
     primaryPer: 0.75,
     screenShotImgs: []
 }
 var siteConfig = require('./' + site + '.js')
-module.exports = _.assign(defaultConfig, siteConfig)
+var configFinal = _.merge(defaultConfig, siteConfig, function(a, b) {
+    var rt;
+    if (_.isArray(a)) {
+        rt = a.concat(b);
+    } else if (_.isObject(a)){
+        rt = _.merge(a, b);
+    }
+    return rt;
+});
+configFinal = Object.freeze(configFinal)
+
+module.exports = configFinal;
