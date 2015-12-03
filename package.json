@@ -17,6 +17,7 @@
     "email-templates": "^1.1.2",
     "fast-csv": "^0.5.2",
     "jade": "^1.7.0",
+    "juice": "^1.8.1",
     "line-reader": "^0.2.4",
     "lodash": "^2.4.1",
     "microtime": "^1.0.1",

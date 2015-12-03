@@ -65,11 +65,15 @@ html
         max-width:800px!important;
       }
       .data-blocker td{ 
+        width: 60px;
         padding:7px 5px 10px; 
         border:1px solid #ddd; 
         text-align: center; 
         font-size:14px; 
         color:#666;
+      }
+      .data-blocker .title{ 
+        width: 90px;
       }
       .drop { 
         color: #31A800; 
@@ -104,30 +108,31 @@ html
               each v in imgData
                 img(width="100%" src="#{v}")
       h3
-        a(href='http://10.16.28.75:3000/hub.html') 点击查看性能指标走势图
+        a(href='http://203.130.42.237/hub/hub.html') 点击查看性能指标走势图
       each v, k in data
         h2 #{k}
-        table(class="data-blocker")
-          tr
-            th KEY
-            th(width="15%") 指标值<br/>
-            th(width="10%") 环比前一天
-            th(width="10%") 同比上周
-            th(width="10%") 同比上月
-            th(width="15%") 周平均<br/>
-            th(width="10%") 周平均<br/>同比上周
-            th(width="15%") 样本数
-          each v1, k1 in v
-            if v1.thatDay
-              tr
-                td !{k1}
-                td !{v1.thatDay && v1.thatDay.data  || '<span class="weaken">N/A</span>'}
-                td !{v1.preDay   || '<span class="weaken">N/A</span>'}
-                td !{v1.preWeek  || '<span class="weaken">N/A</span>'}
-                td !{v1.preMonth || '<span class="weaken">N/A</span>'}
-                td !{rdata[k][k1] || '<span class="weaken">N/A</span>'}
-                td !{rradio[k][k1] || '<span class="weaken">N/A</span>'}
-                td !{v1.thatDay && v1.thatDay.count  || '<span class="weaken">N/A</span>'}
+        if v
+          table(class="data-blocker")
+            tr
+              th KEY
+              th 指标值<br/>
+              th 环比前一天
+              th 同比上周
+              th 同比上月
+              th 周平均<br/>
+              th 周平均<br/>同比上周
+              th 样本数
+            each v1, k1 in v
+              if v1.thatDay
+                tr
+                  td(class="title") !{k1}
+                  td !{v1.thatDay && v1.thatDay.data  || '<span class="weaken">N/A</span>'}
+                  td !{v1.preDay   || '<span class="weaken">N/A</span>'}
+                  td !{v1.preWeek  || '<span class="weaken">N/A</span>'}
+                  td !{v1.preMonth || '<span class="weaken">N/A</span>'}
+                  td !{rdata[k][k1] || '<span class="weaken">N/A</span>'}
+                  td !{rradio[k][k1] || '<span class="weaken">N/A</span>'}
+                  td !{v1.thatDay && v1.thatDay.count  || '<span class="weaken">N/A</span>'}
       if indexCollections
         each v, k in indexCollections.locationRate
           h2 #{k}(以下指标是各定位方式成功率的占比情况，仅供开发者参考)

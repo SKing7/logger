@@ -7,7 +7,6 @@ var config = require('../config/config');
 var cs = require('../lib/console');
 var moment = require('moment');
 var logConfig = config.log;
-var aid = config.aid + '';
 var Quartile = require('../models/quartile'),
     _ = require('lodash');
 
@@ -28,7 +27,6 @@ exports.delete = function (filter, cb) {
     Quartile.remove(filter).exec(cb);
 };
 exports.deleteByDate = function (d, cb) {
-    var filter = {}; 
     var filter = mixedFilter({reportDate: oneDay(d) });
     this.delete(filter, cb);
 };
@@ -74,5 +72,6 @@ function recent7Days(d) {
     return {$gte: start, $lte: end}; 
 }
 function mixedFilter(ext) {
+    var aid = GLOBAL._aid; 
     return _.assign({aid: aid}, ext);
 }

@@ -12,7 +12,6 @@ var transfer = require('../lib/transfer');
 var cs = require('../config/task-log');
 var config = require('../config/config');
 var out = require('../lib/out');
-
 var env = process.env.NODE_ENV || 'dev';
 var logConfig = config.log;
 var time = argv.t;
@@ -47,11 +46,17 @@ eacher(function (data) {
     cs.info('read use time: ' + (endTime - startTime));
     cs.info(count + ' line logs');
     var allDbs = util.getAllDbs();
-    allDbs.forEach(function (v) {
-        var db = v.instance;
-        transfer.combineIndicator(db);
-        calcHub(db, out);
-        out.toDb(_.pick(v, keys));
+    var aids = config.aids;
+    allDbs.forEach(function (v, k) {
+        if (aids.indexOf(+v.aid) >= 0) {
+            global._aid = +v.aid;
+            var db = v.instance;
+            transfer.combineIndicator(db);
+            calcHub(db, out);
+            out.toDb(_.pick(v, keys));
+        } else {
+            console.log(v.aid);
+        }
     });
     //TODO
     setTimeout(function () {
