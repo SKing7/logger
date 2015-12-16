@@ -20,11 +20,14 @@ var secret = util.getSecretConf();
 var env = util.getNodeEnv();
 
 module.exports = {
+    aids: [1],
     aid : 1,
+    supportSSR: true,
     showInChart: ['c_fsp', 'dl', 'fs', 'la', 'received', 'done', 'total'],
     mail: {
 		title: '[速度报表]高德M站速度指标报表_',
         templatePath: path.resolve(__dirname + '/../templates') + '/',
+        templateDir: 'timing-per', 
         to:  secret.to[env],
         cc:  secret.cc[env],
     },

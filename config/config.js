@@ -5,7 +5,6 @@ var secret = util.getSecretConf();
 var site = util.getSiteLabel();
 
 var defaultConfig = {
-    aids: [1],
 	runningLog: {
 		tasks:  {
 			path: 'logs/task',
@@ -26,6 +25,7 @@ var defaultConfig = {
         separator: '||',
     },
     mail: {
+        shotsUrlBase: 'http://203.130.42.237/shots',
         transport: {
             host: 'smtp.alibaba-inc.com',
             secure: true,
