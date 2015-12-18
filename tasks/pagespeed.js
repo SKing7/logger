@@ -4,20 +4,30 @@ var _ = require('lodash');
 var mongoose = require('mongoose');
 var cs = require('../lib/console');
 var config = require('../config/config');
+var aid = config.aid;
 var logConfig = config.log;
 var tRegx = logConfig.timestampRegx;
 var argv = require('optimist').argv;
 var option = argv.o;
 var name = argv.n;
+var excelName = '';
 var quartileController = require('../controller/quartile');
 var pageApis = {
     '/search/view/': ['/service/poi/keywords.json'],
     '/detail/index/': ['/service/valueadded/infosearch.json'],
 };
 mongoose.connect(config.db.url);
+
+if (aid != 1) {
+    excelName = aid + '_' + name;
+} else {
+    excelName = name;
+}
+excelName = excelName.replace(/[\/]/g, '_'); 
+
 switch (option) {
     case 'page':
-        outCsv.init(name);
+        outCsv.init(excelName);
         quartileController.find({
             name: { $in: [name, pg2rt(name)].concat(pageApis[name] || []) },
             timingType: { $in: config.showInChart },
@@ -30,7 +40,7 @@ switch (option) {
         });
         break;
     case 'page_30d':
-        outCsv.init(name + '30d');
+        outCsv.init(excelName + '30d');
         quartileController.find({
             name: { $in: [name, pg2rt(name)].concat(pageApis[name] || []) },
             timingType: { $in: config.showInChart },
@@ -63,6 +73,6 @@ function handlePage(data) {
     });
     outCsv.end();
 }
-function pg2rt(pg) {
+function pg2rt(name) {
     return ('rt' + name).replace(/\//g, '_').substr(0, name.length + 1);
 }

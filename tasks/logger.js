@@ -58,6 +58,7 @@ eacher(function (data) {
             console.log(v.aid);
         }
     });
+    cs.info('calc use time: ' + (mt.now() - endTime));
     //TODO
     setTimeout(function () {
         process.exit();

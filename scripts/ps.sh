@@ -14,3 +14,15 @@ node tasks/pagespeed.js -o page_30d -n '/search/mapview/'
 node tasks/pagespeed.js -o page_30d -n '/detail/index/'
 node tasks/pagespeed.js -o page_30d -n '/navigation/index/'
 node tasks/pagespeed.js -o page_30d -n '/navigation/buslist/'
+#
+#pc
+SITE=pc node tasks/pagespeed.js -o page -n 'rt_mapfileLoad'
+SITE=pc node tasks/pagespeed.js -o page -n 'rt_mapLoad'
+SITE=pc node tasks/pagespeed.js -o page -n 'rt_mapshow'
+SITE=pc node tasks/pagespeed.js -o page -n 'rt_markerKey'
+
+SITE=pc node tasks/pagespeed.js -o page_30d -n 'rt_mapfileLoad'
+SITE=pc node tasks/pagespeed.js -o page_30d -n 'rt_mapLoad'
+SITE=pc node tasks/pagespeed.js -o page_30d -n 'rt_mapshow'
+SITE=pc node tasks/pagespeed.js -o page_30d -n 'rt_markerKey'
+
