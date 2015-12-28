@@ -1,0 +1,135 @@
+html
+  head
+    meta(http-equiv='Content-Type', content='text/html; charset=UTF-8')
+    meta(name='viewport', content='width=device-width')
+    style(type='text/css').
+      * {margin:0;padding:0;}
+      .mb20 {margin-bottom: 20px; }
+      .container {
+        box-sizing:border-box;
+        min-width:500px;
+        color:#333;
+        font-size:14px; 
+        line-height:1.5;
+        display:block!important;
+        padding: 10px 15px;
+        clear:both!important;
+      }
+      h2 { 
+        font-weight: 700;
+        margin-top: 10px;
+        padding: 5px 0;
+        font-size:14px; 
+      } 
+      em {
+        font-style:normal;
+      }
+      a {
+        text-decoration:none;
+        color: #428bca; 
+      }
+      .p-top-15 {
+        padding-top:15px;
+      }
+      .data-blocker { 
+        width:100%!important;
+        font-size:12px; 
+        max-width:1000px!important;
+        box-sizing:border-box;
+        border:1px solid #ddd;
+        border-spacing:0;
+        border-collapse:collapse;
+      }
+      .img-blocker { 
+        width:100%!important;
+        font-size:12px; 
+        max-width:1200px!important;
+        box-sizing:border-box;
+        border:1px solid #fff;
+        border-spacing:0;
+        border-collapse:collapse;
+      }
+      .img-blocker { width: 100%; heigth: auto;}
+      .img-blocker img { 
+        padding-bottom: 15px;
+      }
+      .data-blocker th { 
+        max-width:800px!important;
+        box-sizing:border-box;
+        padding:7px 5px;
+        text-align: center;
+        font-weight:bold;
+        background:#f8f8f8;
+      }
+      .data-blocker tr{
+        max-width:800px!important;
+      }
+      .data-blocker td{ 
+        width: 60px;
+        padding:7px 5px 10px; 
+        border:1px solid #ddd; 
+        text-align: center; 
+        font-size:14px; 
+        color:#666;
+      }
+      .data-blocker .title{ 
+        width: 90px;
+      }
+      .drop { 
+        color: #31A800; 
+      }
+      .error { 
+        color: #F41D00; 
+      }
+      .weaken {
+        font-size:12px;
+        color: #999;
+      }
+      .tip {
+        padding-left:20px;
+        color: #999;
+      }
+      .tip li {
+        list-style: inside disc;
+      }
+    style(type='text/css').
+      @media screen and (min-device-width: 800px){
+        .container {
+            max-width:800px;
+        }
+      }
+  body
+    div.container
+      if imgData.length
+        h3(class="mb20") 各性能指标30天走势
+        table(class="img-blocker")
+          tr
+            td
+              each v in imgData
+                img(width="100%" src="#{v}")
+      h3
+        a(href='http://203.130.42.237/hub/pc_hub.html') 点击查看性能指标走势图
+      each v, k in data
+        h2 #{k}
+        if v
+          table(class="data-blocker")
+            tr
+              th KEY
+              th 指标值<br/>
+              th 环比前一天
+              th 同比上周
+              th 同比上月
+              th 周平均<br/>
+              th 周平均<br/>同比上周
+              th 样本数
+            each v1, k1 in v
+              if v1.thatDay
+                tr
+                  td(class="title") !{k1}
+                  td !{v1.thatDay && v1.thatDay.data  || '<span class="weaken">N/A</span>'}
+                  td !{v1.preDay   || '<span class="weaken">N/A</span>'}
+                  td !{v1.preWeek  || '<span class="weaken">N/A</span>'}
+                  td !{v1.preMonth || '<span class="weaken">N/A</span>'}
+                  td !{rdata[k][k1] || '<span class="weaken">N/A</span>'}
+                  td !{rradio[k][k1] || '<span class="weaken">N/A</span>'}
+                  td !{v1.thatDay && v1.thatDay.count  || '<span class="weaken">N/A</span>'}
