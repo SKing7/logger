@@ -1,6 +1,5 @@
 
 var moment = require('moment');
-var mt = require('microtime');
 var _ = require('lodash');
 var argv = require('optimist').argv;
 var outCsv = require('../lib/out_csv');

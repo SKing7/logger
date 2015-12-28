@@ -1,5 +1,5 @@
 var moment = require('moment');
-var mt = require('microtime');
+var mt = Date; 
 var _ = require('lodash');
 var argv = require('optimist').argv;
 var auditLog = require('audit-log');

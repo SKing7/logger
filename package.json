@@ -20,7 +20,6 @@
     "juice": "^1.8.1",
     "line-reader": "^0.2.4",
     "lodash": "^2.4.1",
-    "microtime": "^1.0.1",
     "moment": "^2.8.3",
     "mongoose": "^3.8.17",
     "mongoose-timestamp": "^0.3.0",

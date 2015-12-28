@@ -1,5 +1,4 @@
 var moment = require('moment');
-var mt = require('microtime');
 var _ = require('lodash');
 var argv = require('optimist').argv;
 var mongoose = require('mongoose');

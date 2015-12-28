@@ -1,5 +1,4 @@
 var moment = require('moment');
-var mt = require('microtime');
 var _ = require('lodash');
 var argv = require('optimist').argv;
 var mongoose = require('mongoose');
@@ -20,7 +19,6 @@ var logConfig = config.log;
 var time = argv.t;
 var eacher;
 var timingDb = {};
-var startTime = mt.now();
 var endTime;
 var limit = 0;
 var count = 0;

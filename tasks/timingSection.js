@@ -1,5 +1,4 @@
 var moment = require('moment');
-var mt = require('microtime');
 var _ = require('lodash');
 var argv = require('optimist').argv;
 var auditLog = require('audit-log');
@@ -13,7 +12,6 @@ var env = process.env.NODE_ENV || 'dev';
 var logConfig = config.log;
 var time = argv.t;
 var eacher;
-var startTime = mt.now();
 var endTime;
 var limit = 0;
 var count = 0;
