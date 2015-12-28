@@ -18,8 +18,9 @@ var pageApis = {
 };
 mongoose.connect(config.db.url);
 
+//TODO
 if (aid != 1) {
-    excelName = aid + '_' + name;
+    excelName = (config.aidAlias || config.aid) + '_' + name;
 } else {
     excelName = name;
 }

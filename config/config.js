@@ -5,6 +5,7 @@ var secret = util.getSecretConf();
 var site = util.getSiteLabel();
 
 var defaultConfig = {
+    aidAlias: site,
 	runningLog: {
 		tasks:  {
 			path: 'logs/task',
@@ -62,7 +63,7 @@ var defaultConfig = {
 var siteConfig = require('./' + site + '.js')
 var configFinal = util.mergeDeep(defaultConfig, siteConfig)
 configFinal = Object.freeze(configFinal)
-//设置默认aid
-global._aid = configFinal.aid;
+//设置默认数字类型的aid
+global._aid = +configFinal.aid;
 
 module.exports = configFinal;

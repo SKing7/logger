@@ -18,8 +18,9 @@ var time = argv.t;
 var eacher;
 var startTime = mt.now();
 var endTime;
-var limit = 10000;
+var limit = 1000;
 var count = 0;
+var aid = global._aid;
 
 auditLog.addTransport("mongoose", {connectionString: config.db.url});
 mongoose.connect(config.db.url);
@@ -46,16 +47,13 @@ eacher(function (data) {
     cs.info('read use time: ' + (endTime - startTime));
     cs.info(count + ' line logs');
     var allDbs = util.getAllDbs();
-    var aids = config.aids;
     allDbs.forEach(function (v, k) {
-        if (aids.indexOf(+v.aid) >= 0) {
-            global._aid = +v.aid;
+        if (aid === +v.aid) {
             var db = v.instance;
             transfer.combineIndicator(db);
             calcHub(db, out);
             out.toDb(_.pick(v, keys));
         } else {
-            console.log(v.aid);
         }
     });
     cs.info('calc use time: ' + (mt.now() - endTime));

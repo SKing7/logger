@@ -20,7 +20,6 @@ var secret = util.getSecretConf();
 var env = util.getNodeEnv();
 
 module.exports = {
-    aids: [1],
     aid : 1,
     supportSSR: true,
     showInChart: ['c_fsp', 'dl', 'fs', 'la', 'received', 'done', 'total'],
