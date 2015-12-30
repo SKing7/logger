@@ -1,4 +1,4 @@
 #!/bin/bash
-cd /home/logger/glogger
+cd /opt/timing/glogger
 /usr/bin/phantomjs lib/index.js
 

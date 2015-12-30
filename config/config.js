@@ -26,7 +26,7 @@ var defaultConfig = {
         separator: '||',
     },
     mail: {
-        shotsUrlBase: 'http://203.130.42.237/shots',
+        shotsUrlBase: 'http://140.205.177.57/shots',
         transport: {
             host: 'smtp.alibaba-inc.com',
             secure: true,

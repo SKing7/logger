@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /home/logger/analyzer
+cd /opt/timing/logger
 NODE_ENV=production /usr/local/bin/node tasks/logger.js
