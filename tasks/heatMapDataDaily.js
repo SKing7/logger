@@ -56,11 +56,14 @@ function groupDate(data, totalCountMap) {
     _.forEach(tmpData, function (v, dateStr) {
         tmpData[dateStr] = _.groupBy(v, function (v) {
             var sec=  parseInt(v.value / 100);
-            if (sec > 50) {
+            if (sec > 30) {
                 return 'toDel';
             }
             return sec;
         });
+        if (tmpData[dateStr].toDel) {
+            totalCountMap[dateStr] -= tmpData[dateStr].toDel.length;
+        }
         delete tmpData[dateStr].toDel;
     });
     return tmpData;
