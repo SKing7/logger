@@ -1,7 +1,7 @@
 var path = require('path');
 var _ = require('lodash');
 var util = require('../lib/util');
-var secret = util.getSecretConf();
+var defaultConfig = util.getSecretConf('defaultLogger');
 var site = util.getSiteLabel();
 
 var defaultConfig = {
@@ -26,17 +26,17 @@ var defaultConfig = {
         separator: '||',
     },
     mail: {
-        shotsUrlBase: 'http://140.205.177.57/shots',
+        shotsUrlBase: defaultConfig.shotsPath, 
         transport: {
-            host: 'smtp.alibaba-inc.com',
+            host: defaultConfig.SMTPHost,
             secure: true,
             port: 465,
             tls: {
                 rejectUnauthorized: false
             },
             auth: {
-                user: 'opendev_noreply@alibaba-inc.com',
-                pass: secret.p 
+                user: defaultConfig.u,
+                pass: defaultConfig.p 
             }
         }
     },

@@ -16,13 +16,13 @@ cd /opt/timing/logger
 /usr/local/bin/node tasks/pagespeed.js -o page_30d -n '/navigation/buslist/'
 #
 #pc
-SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page -n 'rt_mapfileLoad'
-SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page -n 'rt_mapLoad'
-SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page -n 'rt_mapshow'
-SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page -n 'rt_markerKey'
-
-SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page_30d -n 'rt_mapfileLoad'
-SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page_30d -n 'rt_mapLoad'
-SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page_30d -n 'rt_mapshow'
-SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page_30d -n 'rt_markerKey'
-
+#SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page -n 'rt_mapfileLoad'
+#SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page -n 'rt_mapLoad'
+#SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page -n 'rt_mapshow'
+#SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page -n 'rt_markerKey'
+#
+#SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page_30d -n 'rt_mapfileLoad'
+#SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page_30d -n 'rt_mapLoad'
+#SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page_30d -n 'rt_mapshow'
+#SITE=pc /usr/local/bin/node tasks/pagespeed.js -o page_30d -n 'rt_markerKey'
+#
